@@ -6,43 +6,43 @@ import jwt, { JwtPayload } from 'jsonwebtoken';
 import { verifyGoogleToken } from '../../middlewares/googleAuth.middleware';
 
 export class AuthService {
-  private userRepository: UserRepo;
-  private otpService: OTPService;
-  private emailService: EmailService;
-  private userStore: Record<string, { userName: string; password: string; otp: OTPDetails }> = {};
+  private _userRepository: UserRepo;
+  private _otpService: OTPService;
+  private _emailService: EmailService;
+  private _userStore: Record<string, { userName: string; password: string; otp: OTPDetails }> = {};
 
   constructor(userRepository: UserRepo, otpService: OTPService, emailService: EmailService) {
-    this.userRepository = userRepository;
-    this.otpService = otpService;
-    this.emailService = emailService;
+    this._userRepository = userRepository;
+    this._otpService = otpService;
+    this._emailService = emailService;
   }
 
   // register service
   async register(userData: IUser) {
     const { email, password, userName } = userData;
-    const existUser = await this.userRepository.findByEmail(email);
+    const existUser = await this._userRepository.findByEmail(email);
     if (existUser) {
       throw new Error('User already exists');
     }
 
-    const otp = this.otpService.generateOTP();
+    const otp = this._otpService.generateOTP();
     const otpExpiry = new Date(Date.now() + 5 * 60 * 1000);
     console.log('Your OTP is :', otp);
     // Store temporary user data
-    this.userStore[email] = {
+    this._userStore[email] = {
       userName,
       password,
       otp: { code: otp, expiresAt: otpExpiry },
     };
 
-    await this.emailService.sendOTPEmail(email, otp);
+    await this._emailService.sendOTPEmail(email, otp);
 
     return { message: 'Registration successful. Check your email for OTP.' };
   }
 
   // verify otp service
   async verifyOTP(email: string, otp: string) {
-    const storedUser = this.userStore[email];
+    const storedUser = this._userStore[email];
 
     if (!storedUser) {
       throw new Error('User not found');
@@ -51,7 +51,7 @@ export class AuthService {
       throw new Error('Invalid or expired OTP');
     }
 
-    const newUser = await this.userRepository.createUser({
+    const newUser = await this._userRepository.createUser({
       userName: storedUser.userName,
       email,
       password: storedUser.password,
@@ -60,7 +60,7 @@ export class AuthService {
     });
 
 
-    delete this.userStore[email];
+    delete this._userStore[email];
 
     if (!newUser) {
       throw new Error('User creation failed');
@@ -79,27 +79,32 @@ export class AuthService {
 
   // resent otp
   async resendOTP(email: string) {
-    const storedUser = this.userStore[email];
+    const storedUser = this._userStore[email];
     if (!storedUser) {
       throw new Error('User not found');
     }
-    const otp = this.otpService.generateOTP();
+    const otp = this._otpService.generateOTP();
     const otpExpiry = new Date(Date.now() + 5 * 60 * 1000);
     console.log('Regenerated OTP', otp);
     storedUser.otp = { code: otp, expiresAt: otpExpiry };
-    this.userStore[email] = storedUser;
-    await this.emailService.sendOTPEmail(email, otp);
+    this._userStore[email] = storedUser;
+    await this._emailService.sendOTPEmail(email, otp);
     return { message: 'OTP Resent Successfully. Check your email.' };
   }
 
   // login
   async login(email: string, password: string) {
-    const user = await this.userRepository.findByEmail(email);
+    const user = await this._userRepository.findByEmail(email);
     if (!user) {
       throw new Error('Invalid credentials');
     }
 
-    const isPasswordValid = await this.userRepository.passwordCompare(password, user.password);
+    const isActive = await this._userRepository.findStatus(user)
+    if(!isActive){
+      throw new Error('User is not active')
+    }
+
+    const isPasswordValid = await this._userRepository.passwordCompare(password, user.password);
     if (!isPasswordValid) {
       throw new Error('Invalid credentials');
     }
@@ -117,7 +122,7 @@ export class AuthService {
 
   // forget password
   async forgetPassword(email: string) {
-    const user = await this.userRepository.findByEmail(email);
+    const user = await this._userRepository.findByEmail(email);
     if (!user) {
       throw new Error('User not found');
     }
@@ -125,7 +130,7 @@ export class AuthService {
     const resetToken = jwt.sign({ email: user.email }, process.env.JWT_SECRET || '', { expiresIn: '15m' });
     const resetLink = `http://localhost:4200/student/reset-password/${resetToken}`;
     console.log('Password reset link', resetLink)
-    await this.emailService.sendPasswordResetEmail(email, resetLink);
+    await this._emailService.sendPasswordResetEmail(email, resetLink);
     return {
       message: 'Password Reset Link Sent Successfully. Check your email.',
     };
@@ -141,11 +146,11 @@ export class AuthService {
     }
     const email = decoded.email as string;
 
-    const user = await this.userRepository.findByEmail(email);
+    const user = await this._userRepository.findByEmail(email);
     if (!user) {
       throw new Error('User not found');
     }
-    await this.userRepository.updatePassword(user, password);
+    await this._userRepository.updatePassword(user, password);
     return {
       message: 'Password Reset Successfully',
     };
@@ -158,9 +163,9 @@ export class AuthService {
       throw new Error('Invalid Google token');
     }
 
-    let user: GoogleUser | null = await this.userRepository.findByEmail(googleUser.email as string);
+    let user: GoogleUser | null = await this._userRepository.findByEmail(googleUser.email as string);
     if (!user) {
-      user = await this.userRepository.createGoogleUser({
+      user = await this._userRepository.createGoogleUser({
         email: googleUser.email,
         userName: googleUser.name,
         googleId: googleUser.sub,
@@ -171,7 +176,7 @@ export class AuthService {
       user.googleId = googleUser.sub;
       user.profilePhoto = googleUser.picture;
       user.isVerified = true;
-      await this.userRepository.updateGoogleUser(user);
+      await this._userRepository.updateGoogleUser(user);
     }
 
     if (!user) {

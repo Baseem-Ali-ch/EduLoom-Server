@@ -2,10 +2,10 @@ import { ObjectId } from 'mongoose';
 import { Instructor } from '../../models/Instructor';
 import { Notification } from '../../models/Notification';
 import { User } from '../../models/User';
-import { IUser } from '../../interfaces/IUser';
-import bcrypt from 'bcrypt'
+import { IInstructorRepoStudent, IUser } from '../../interfaces/IUser';
+import bcrypt from 'bcrypt';
 
-export class InstructorRepo {
+export class InstructorRepo implements IInstructorRepoStudent {
   async findById(id: ObjectId) {
     return await User.findById(id);
   }

@@ -1,11 +1,11 @@
 import nodemailer from 'nodemailer';
-import { IUser } from 'src/interfaces/IUser';
+import { IEmailService, IUser } from 'src/interfaces/IUser';
 
-export class EmailService {
-  private transporter;
+export class EmailService implements IEmailService{
+  private _transporter;
 
   constructor() {
-    this.transporter = nodemailer.createTransport({
+    this._transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
         user: process.env.EMAIL_USER,
@@ -16,7 +16,7 @@ export class EmailService {
 
   // send mail for otp verification
   async sendOTPEmail(email: string, otp: string) {
-    await this.transporter.sendMail({
+    await this._transporter.sendMail({
       from: process.env.EMAIL_USER,
       to: email,
       subject: '🔐 OTP Verification',
@@ -43,7 +43,7 @@ export class EmailService {
 
   // send mail for password reset
   async sendPasswordResetEmail(email: string, resetLink: string) {
-    await this.transporter.sendMail({
+    await this._transporter.sendMail({
       from: process.env.EMAIL_USER,
       to: email,
       subject: 'Reset Your Password',
@@ -74,7 +74,7 @@ export class EmailService {
 
   // send mail for instructor request
   async sendNotificationEmail(user: IUser, message: string) {
-    await this.transporter.sendMail({
+    await this._transporter.sendMail({
       from: process.env.EMAIL_USER,
       to: user.email,
       subject: '🎉 Congratulations! Your Instructor Request is Accepted',

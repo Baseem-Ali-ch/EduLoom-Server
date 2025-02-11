@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import path from 'path';
+import morgan from 'morgan'
 
 // Configure environment variables
 dotenv.config({ path: './src/config/.env' });
@@ -22,6 +23,7 @@ const app = express();
 connectDB();
 
 // Middleware configurations
+app.use(morgan('dev'))
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());

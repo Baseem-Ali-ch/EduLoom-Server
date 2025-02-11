@@ -1,26 +1,27 @@
 import { ObjectId } from 'mongoose';
-import { IInstructor } from 'src/interfaces/IInstructor';
-import { InstructorRepo } from 'src/repo/student/instructor.repo';
-import { UserRepo } from 'src/repo/student/student.repo';
+import { IInstructor } from '../../interfaces/IInstructor';
+import { IProfileService } from '../../interfaces/IUser';
+import { InstructorRepo } from '../../repo/student/instructor.repo';
+import { UserRepo } from '../../repo/student/student.repo';
 
-export class ProfileService {
-  private userRepository: UserRepo;
-  private instructorRepository: InstructorRepo;
+export class ProfileService implements IProfileService{
+  private _userRepository: UserRepo;
+  private _instructorRepository: InstructorRepo;
 
   constructor(userRepository: UserRepo, instructorRepository: InstructorRepo) {
-    this.userRepository = userRepository;
-    this.instructorRepository = instructorRepository;
+    this._userRepository = userRepository;
+    this._instructorRepository = instructorRepository;
   }
 
   // get all user details
   async userDetails(userId: ObjectId) {
-    const user = await this.userRepository.findById(userId);
+    const user = await this._userRepository.findById(userId);
     return user;
   }
 
   // update user details
   async updateUserDetails(userId: ObjectId, userName: string, phone: string) {
-    const user = await this.userRepository.findById(userId);
+    const user = await this._userRepository.findById(userId);
     if (!user) {
       throw new Error('User not found');
     }
@@ -28,34 +29,34 @@ export class ProfileService {
     user.userName = userName;
     user.phone = phone;
 
-    const updatedUser = await this.userRepository.updateUser(user);
+    const updatedUser = await this._userRepository.updateUser(user);
     return updatedUser;
   }
 
   // change password
   async changePassword(userId: ObjectId, currentPassword: string, newPassword: string) {
-    const user = await this.userRepository.findById(userId);
+    const user = await this._userRepository.findById(userId);
     if (!user) {
       throw new Error('User not found');
     }
 
-    const isValidPassword = await this.userRepository.passwordCompare(currentPassword, user.password);
+    const isValidPassword = await this._userRepository.passwordCompare(currentPassword, user.password);
     if (!isValidPassword) {
       throw new Error('Invalid current password');
     }
 
-    const changedPassword = await this.userRepository.updatePassword(user, newPassword);
+    const changedPassword = await this._userRepository.updatePassword(user, newPassword);
     return changedPassword;
   }
 
   // instructor request to admin
-  async instructorReq(data: IInstructor) {
-    const { userName, userId, phone, place, state, qualification, workExperience, lastWorkingPlace, specialization } = data;
+  async instructorReq(data: IInstructor, userId: ObjectId) {
+    const { userName, phone, place, state, qualification, workExperience, lastWorkingPlace, specialization } = data;
 
     if (!userId) {
       throw new Error('User  ID is required');
     }
-    const user = await this.instructorRepository.findById(userId);
+    const user = await this._instructorRepository.findById(userId);
     if (!user) {
       throw new Error('User  not found');
     }
@@ -68,7 +69,7 @@ export class ProfileService {
         'We have received your application to become an instructor. Our team is currently reviewing your qualifications and experience. We aim to provide a response within 5-7 business days. Thank you for your patience.',
       status: 'pending',
     };
-    await this.instructorRepository.createNotification(notificationData);
+    await this._instructorRepository.createNotification(notificationData);
 
     const instructorData = {
       userName,
@@ -81,6 +82,6 @@ export class ProfileService {
       lastWorkingPlace,
       specialization,
     };
-    await this.instructorRepository.createInstructor(instructorData);
+    await this._instructorRepository.createInstructor(instructorData);
   }
 }

@@ -45,6 +45,9 @@ adminRouter.post('/change-password', verifyToken, (req, res) => profileControlle
 
 // user management routes
 adminRouter.get('/getAllUser',  (req, res) => userMangementController.allUserDetails(req, res));
+adminRouter.patch('/changeStatus/status',  (req, res) => userMangementController.changeStatus(req, res));
 
 // instructor mangement routes
 adminRouter.get('/getAllInstructor',  (req, res) => instructorMangementController.allInstructorDetails(req, res));
+adminRouter.patch('/changeStatusIns/status',  (req, res) => instructorMangementController.changeStatus(req, res));
+

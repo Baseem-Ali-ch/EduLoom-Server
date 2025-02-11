@@ -1,6 +1,7 @@
 import crypto from "crypto";
+import { IOTPService } from "../../interfaces/IUser";
 
-export class OTPService {
+export class OTPService implements IOTPService{
   generateOTP(length: number = 6): string {
     // Create a string of digits
     const digits = "0123456789";

@@ -1,15 +1,23 @@
+import { IUserManageService } from 'src/interfaces/IAdmin';
 import { AdminRepo } from '../../repo/admin/admin.repo';
 
-export class UserMangeService {
-  private adminRepository: AdminRepo;
+export class UserMangeService implements IUserManageService{
+  private _adminRepository: AdminRepo;
 
   constructor(adminRepository: AdminRepo) {
-    this.adminRepository = adminRepository;
+    this._adminRepository = adminRepository;
   }
 
   // get all user details
-  async allUserDetails() {
-    const allUser = await this.adminRepository.findUser();
-    return allUser;
+  async allUserDetails(limit: number, skip: number) {
+    const allUsers = await this._adminRepository.findUser(limit, skip);
+    const totalUsers = await this._adminRepository.findTotalUsers();
+    return { allUsers, totalUsers };
+  }
+
+  async changeStatus(userId: string, status: boolean) {
+    console.log('user id', userId, status);
+    const changed = await this._adminRepository.findByIdAndUpdate(userId, status);
+    return changed;
   }
 }

@@ -4,17 +4,17 @@ import bcrypt from 'bcrypt';
 import { EmailService } from '../student/email.services';
 
 export class InstructorAuthService {
-  private instructorRepository: InstructorRepo;
-  private emailService: EmailService;
+  private _instructorRepository: InstructorRepo;
+  private _emailService: EmailService;
 
   constructor(instructorRepository: InstructorRepo, emailService: EmailService) {
-    this.instructorRepository = instructorRepository;
-    this.emailService = emailService
+    this._instructorRepository = instructorRepository;
+    this._emailService = emailService
   }
 
   // register service
   async register(email: string, password: string) {
-    const instructor = await this.instructorRepository.findByEmail(email);
+    const instructor = await this._instructorRepository.findByEmail(email);
     if (!instructor) {
       throw new Error('Instructor not found, Please enter registered email');
     }
@@ -23,13 +23,12 @@ export class InstructorAuthService {
       throw new Error('Instructor already registered');
     }
 
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     instructor.password = hashedPassword;
     instructor.isActive = true;
-
-    await this.instructorRepository.update({ instructor });
+    instructor.isVerified = true;
+    await this._instructorRepository.update( instructor );
 
     const token = jwt.sign({ id: instructor._id, email: instructor.email }, process.env.JWT_SECRET || '', { expiresIn: '1d' });
 
@@ -46,12 +45,17 @@ export class InstructorAuthService {
 
   // login
   async login(email: string, password: string) {
-    const instructor = await this.instructorRepository.findByEmail(email);
+    const instructor = await this._instructorRepository.findByEmail(email);
     if (!instructor) {
       throw new Error('Invalid credentials');
     }
 
-    const isPasswordValid = await this.instructorRepository.passwordCompare(password, instructor.password as string);
+    const isActive = await this._instructorRepository.findStatus(instructor)
+    if(!isActive){
+      throw new Error('User is not active')
+    }
+
+    const isPasswordValid = await this._instructorRepository.passwordCompare(password, instructor.password as string);
     if (!isPasswordValid) {
       throw new Error('Invalid credentials');
     }
@@ -69,7 +73,7 @@ export class InstructorAuthService {
 
   // // forget password
   async forgetPassword(email: string) {
-    const instructor = await this.instructorRepository.findByEmail(email);
+    const instructor = await this._instructorRepository.findByEmail(email);
     if (!instructor) {
       throw new Error('Instructor not found');
     }
@@ -77,7 +81,7 @@ export class InstructorAuthService {
     const resetToken = jwt.sign({ email: instructor.email }, process.env.JWT_SECRET || '', { expiresIn: '15m' });
     const resetLink = `http://localhost:4200/instructor/reset-password/${resetToken}`;
     console.log('Password reset link', resetLink)
-    await this.emailService.sendPasswordResetEmail(email, resetLink);
+    await this._emailService.sendPasswordResetEmail(email, resetLink);
     return {
       message: 'Password Reset Link Sent Successfully. Check your email.',
     };
@@ -93,11 +97,11 @@ export class InstructorAuthService {
     }
     const email = decoded.email as string;
 
-    const user = await this.instructorRepository.findByEmail(email);
+    const user = await this._instructorRepository.findByEmail(email);
     if (!user) {
       throw new Error('User not found');
     }
-    await this.instructorRepository.updatePassword(user, password);
+    await this._instructorRepository.updatePassword(user, password);
     return {
       message: 'Password Reset Successfully',
     };

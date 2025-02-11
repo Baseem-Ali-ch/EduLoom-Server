@@ -1,8 +1,9 @@
 import { User } from '../../models/User';
 import { Notification } from '../../models/Notification';
 import { ObjectId } from 'mongoose';
+import { INotificationRepo } from '../../interfaces/INotificationRepo ';
 
-export class NotificationRepo {
+export class NotificationRepo implements INotificationRepo{
   async find(): Promise<any> {
     return await Notification.find().sort({ createdAt: -1 });
   }

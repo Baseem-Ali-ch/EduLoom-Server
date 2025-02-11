@@ -1,5 +1,6 @@
 import { NextFunction } from "express";
 import jwt from "jsonwebtoken";
+import logger from "../configs/logger";
 
 export const verifyToken = (req: any, res: any, next: NextFunction) => {
   const authHeader = req.headers["authorization"];
@@ -15,6 +16,7 @@ export const verifyToken = (req: any, res: any, next: NextFunction) => {
     next();
   } catch (error) {
     console.log("Invalid token", error);
+    logger.error('Middleware : Error invalid token', error);
     return res.status(403).json({ message: "Invalid token" });
   }
 };

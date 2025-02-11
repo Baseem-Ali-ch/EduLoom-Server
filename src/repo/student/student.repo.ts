@@ -1,9 +1,9 @@
-import { GoogleUser, IUser } from 'src/interfaces/IUser';
+import { GoogleUser, IUser, IUserRepo } from 'src/interfaces/IUser';
 import { User } from '../../models/User';
 import bcrypt from 'bcrypt';
 import { ObjectId } from 'mongoose';
 
-export class UserRepo {
+export class UserRepo implements IUserRepo{
   async findByEmail(email: string): Promise<IUser | null> {
     return await User.findOne({ email });
   }
@@ -41,5 +41,9 @@ export class UserRepo {
 
   async findById(userId: ObjectId): Promise<IUser | null> {
     return await User.findById(userId);
+  }
+
+  async findStatus(user:IUser): Promise<IUser | null> {
+    return await User.findOne({ email: user.email, isActive: user.isActive === true });
   }
 }
