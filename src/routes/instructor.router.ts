@@ -6,6 +6,7 @@ import { EmailService } from '../services/student/email.services';
 import { verifyToken } from '../middlewares/auth.middleware';
 import { InstructorProfileController } from '../controllers/instructor/profile.controller';
 import { InstructorProfileService } from '../services/instructor/profile.services';
+import upload from '../configs/multer';
 
 export const instructorRouter = express.Router()
 
@@ -36,5 +37,5 @@ instructorRouter.post('/reset-password', (req, res) => authController.resetPassw
 // profile routes
 instructorRouter.get('/getInstructor', verifyToken, (req, res) => profileController.instructorDetails(req, res));
 instructorRouter.put('/profileUpdate', verifyToken, (req, res) => profileController.updateInstructor(req, res));
-// instructorRouter.post('/profile-photo', verifyToken, (req, res) => profileController.uploadProfile(req, res))
+instructorRouter.post('/profile-photo',verifyToken, upload.single('profilePhoto'), (req, res) => profileController.uploadProfile(req, res));
 instructorRouter.post('/change-password', verifyToken, (req, res) => profileController.changePassword(req, res));

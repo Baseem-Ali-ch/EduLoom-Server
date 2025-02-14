@@ -3,14 +3,23 @@ import { IInstructor } from '../../interfaces/IInstructor';
 import { IProfileService } from '../../interfaces/IUser';
 import { InstructorRepo } from '../../repo/student/instructor.repo';
 import { UserRepo } from '../../repo/student/student.repo';
+import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 
-export class ProfileService implements IProfileService{
+export class ProfileService implements IProfileService {
   private _userRepository: UserRepo;
   private _instructorRepository: InstructorRepo;
+  private _s3Client: S3Client;
 
   constructor(userRepository: UserRepo, instructorRepository: InstructorRepo) {
     this._userRepository = userRepository;
     this._instructorRepository = instructorRepository;
+    this._s3Client = new S3Client({
+      region: process.env.AWS_REGION,
+      credentials: {
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+      },
+    });
   }
 
   // get all user details
@@ -51,7 +60,7 @@ export class ProfileService implements IProfileService{
 
   // instructor request to admin
   async instructorReq(data: IInstructor, userId: ObjectId) {
-    const { userName, phone, place, state, qualification, workExperience, lastWorkingPlace, specialization } = data;
+    const { userName, phone, country, state, qualification, workExperience, lastWorkingPlace, specialization } = data;
 
     if (!userId) {
       throw new Error('User  ID is required');
@@ -75,7 +84,7 @@ export class ProfileService implements IProfileService{
       userName,
       email: user.email,
       phone,
-      place,
+      country,
       state,
       qualification,
       workExperience,
@@ -83,5 +92,31 @@ export class ProfileService implements IProfileService{
       specialization,
     };
     await this._instructorRepository.createInstructor(instructorData);
+  }
+
+  async uploadFileToS3(file: Express.Multer.File, userId: ObjectId) {
+    const params = {
+      Bucket: process.env.AWS_S3_BUCKET_NAME!,
+      Key: `profile-photos/${Date.now()}-${file.originalname}`,
+      Body: file.buffer,
+      ContentType: file.mimetype,
+    };
+
+    try {
+      await this._s3Client.send(new PutObjectCommand(params));
+      const photoUrl = `https://${params.Bucket}.s3.${process.env.AWS_REGION}.amazonaws.com/${params.Key}`;
+
+      const user = await this._userRepository.findById(userId);
+      if (!user) {
+        throw new Error('User not found');
+      }
+      user.profilePhoto = photoUrl;
+      console.log('user after upload', user)
+      await this._userRepository.updateUser(user);
+      return photoUrl;
+    } catch (error) {
+      console.log('Error uploading file to s3', error);
+      throw new Error('File upload failed');
+    }
   }
 }

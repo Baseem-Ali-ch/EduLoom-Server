@@ -14,7 +14,7 @@ const InstructorSchema = new mongoose.Schema<IInstructor>(
     email: {
       type: String,
     },
-    place: {
+    country: {
       type: String,
       required: true,
     },

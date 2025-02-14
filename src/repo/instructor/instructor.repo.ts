@@ -35,3 +35,4 @@ export class InstructorRepo implements IInstructorRepo {
     return await Instructor.findOne({ email: instructor.email, isActive: instructor.isActive === true });
   }
 }
+

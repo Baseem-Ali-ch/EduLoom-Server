@@ -6,7 +6,7 @@ export interface IInstructor {
   userId?: ObjectId;
   email: string;
   phone?: string;
-  place?: string;
+  country?: string;
   state?: string;
   qualification?: string;
   workExperience?: string;

@@ -57,4 +57,24 @@ export class ProfileController {
     }
   }
 
+  // profile photo update
+  async uploadProfile(req: any, res: Response): Promise<void> {
+    try {
+      console.log('req', req.file)
+      console.log('userid', req.userId)
+      const userId = req.userId
+      if (!req.file) {
+        res.status(400).json({ message: 'No file uploaded' });
+        return;
+      }
+
+      const fileUrl = await this._profileService.uploadFileToS3(req.file, userId);
+      res.status(200).json({ message: "Update successful", photoUrl: fileUrl });
+    } catch (error) {
+      console.log("Failed to update profile photo", error);
+      logger.error('Controller : Error to update profile photo', error);
+      res.status(500).json({ message: "Failed to update profile photo" });
+    }
+  }
+
 }

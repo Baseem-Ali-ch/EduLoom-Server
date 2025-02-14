@@ -1,11 +1,20 @@
+import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import { IInstructor, IInstructorProfileService } from 'src/interfaces/IInstructor';
 import { InstructorRepo } from 'src/repo/instructor/instructor.repo';
 
-export class InstructorProfileService implements IInstructorProfileService{
+export class InstructorProfileService implements IInstructorProfileService {
   private _instructorRepository: InstructorRepo;
+  private _s3Client: S3Client;
 
   constructor(instructorRepository: InstructorRepo) {
     this._instructorRepository = instructorRepository;
+    this._s3Client = new S3Client({
+      region: process.env.AWS_REGION,
+      credentials: {
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+      },
+    });
   }
 
   // get instructor details
@@ -38,5 +47,32 @@ export class InstructorProfileService implements IInstructorProfileService{
 
     const changedPassword = await this._instructorRepository.updatePassword(instructor, newPassword);
     return changedPassword;
+  }
+
+  // update profile photo
+  async uploadFileToS3(file: Express.Multer.File, userId: any) {
+    const params = {
+      Bucket: process.env.AWS_S3_BUCKET_NAME!,
+      Key: `profile-photos/${Date.now()}-${file.originalname}`,
+      Body: file.buffer,
+      ContentType: file.mimetype,
+    };
+
+    try {
+      await this._s3Client.send(new PutObjectCommand(params));
+      const photoUrl = `https://${params.Bucket}.s3.${process.env.AWS_REGION}.amazonaws.com/${params.Key}`;
+
+      const user = await this._instructorRepository.findById(userId);
+      if (!user) {
+        throw new Error('User not found');
+      }
+      user.profilePhoto = photoUrl;
+      console.log('user after upload', user);
+      await this._instructorRepository.update(user);
+      return photoUrl;
+    } catch (error) {
+      console.log('Error uploading file to s3', error);
+      throw new Error('File upload failed');
+    }
   }
 }

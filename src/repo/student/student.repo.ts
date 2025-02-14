@@ -47,3 +47,5 @@ export class UserRepo implements IUserRepo{
     return await User.findOne({ email: user.email, isActive: user.isActive === true });
   }
 }
+
+

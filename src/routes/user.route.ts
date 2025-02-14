@@ -11,6 +11,7 @@ import { InstructorRepo } from '../repo/student/instructor.repo';
 import { NotificationController } from '../controllers/student/notification.controller';
 import { NotificationRepo } from '../repo/student/notification.repo';
 import { NotificationService } from '../services/student/notification.services';
+import upload from '../configs/multer';
 
 export const userRouter = express.Router();
 
@@ -47,7 +48,8 @@ userRouter.post('/google-auth', (req, res) => authController.googleAuth(req, res
 // profile routes
 userRouter.get('/getUser', verifyToken, (req, res) => profileController.userDetails(req, res));
 userRouter.put('/profileUpdate', verifyToken, (req, res) => profileController.updateUser(req, res));
-// userRouter.post('/profile-photo', verifyToken, (req, res) => profileController.uploadProfile(req, res))
+// userRouter.post('/profile-photo', verifyToken, (req, res) => profileController.uploadProfile(req, res)
+userRouter.post('/profile-photo',verifyToken, upload.single('profilePhoto'), (req, res) => profileController.uploadProfile(req, res));
 userRouter.post('/change-password', verifyToken, (req, res) => profileController.changePassword(req, res));
 userRouter.post('/instructor-request', verifyToken, (req, res) => profileController.instructorRequest(req, res));
 

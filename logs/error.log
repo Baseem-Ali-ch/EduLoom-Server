@@ -5,3 +5,12 @@
 2025-02-11T03:21:55.503Z [error]: Controller : Error during login Invalid credentials - Error: Invalid credentials
     at AuthService.login (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\services\student\auth.services.ts:109:13)
     at async AuthController.login (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\student\auth.controller.ts:58:22)
+2025-02-12T05:51:47.065Z [error]: Controller : Error send instructor request Instructor validation failed: place: Path `place` is required. - ValidationError: Instructor validation failed: place: Path `place` is required.
+    at model.Document.invalidate (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\mongoose\lib\document.js:3334:32)
+    at C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\mongoose\lib\document.js:3095:17
+    at C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\mongoose\lib\schemaType.js:1407:9
+    at processTicksAndRejections (node:internal/process/task_queues:77:11)
+2025-02-12T11:24:01.432Z [error]: Controller : Error during login secretOrPrivateKey must have a value - Error: secretOrPrivateKey must have a value
+    at Object.module.exports [as sign] (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\jsonwebtoken\sign.js:111:20)
+    at AuthService.login (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\services\student\auth.services.ts:113:30)
+    at async AuthController.login (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\student\auth.controller.ts:58:22)
