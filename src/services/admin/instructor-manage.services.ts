@@ -15,7 +15,7 @@ export class InstructorMangeService implements IInstructorMangeService{
   }
 
   async changeStatus(instructorId: string, status: boolean){
-    const changed = await this._adminRepository.findByIdAndUpdateIns(instructorId, status)
+    const changed = await this._adminRepository.updateById(instructorId, {isActive: status})
     return changed
   }
 }

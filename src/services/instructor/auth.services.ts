@@ -9,7 +9,7 @@ export class InstructorAuthService {
 
   constructor(instructorRepository: InstructorRepo, emailService: EmailService) {
     this._instructorRepository = instructorRepository;
-    this._emailService = emailService
+    this._emailService = emailService;
   }
 
   // register service
@@ -28,13 +28,15 @@ export class InstructorAuthService {
     instructor.password = hashedPassword;
     instructor.isActive = true;
     instructor.isVerified = true;
-    await this._instructorRepository.update( instructor );
+    await this._instructorRepository.update(instructor);
 
     const token = jwt.sign({ id: instructor._id, email: instructor.email }, process.env.JWT_SECRET || '', { expiresIn: '1d' });
+    const refreshToken = jwt.sign({ id: instructor._id, email: instructor.email }, process.env.JWT_REFRESH_SECRET || '', { expiresIn: '7d' });
 
     return {
       message: 'Registration successful.',
       token,
+      refreshToken,
       instructor: {
         id: instructor._id,
         email: instructor.email,
@@ -49,10 +51,9 @@ export class InstructorAuthService {
     if (!instructor) {
       throw new Error('Invalid credentials');
     }
-
-    const isActive = await this._instructorRepository.findStatus(instructor)
-    if(!isActive){
-      throw new Error('User is not active')
+    const result = await this._instructorRepository.findStatus(instructor);
+    if (result?.isActive === false) {
+      throw new Error('Instructor is blocked');
     }
 
     const isPasswordValid = await this._instructorRepository.passwordCompare(password, instructor.password as string);
@@ -61,8 +62,11 @@ export class InstructorAuthService {
     }
 
     const token = jwt.sign({ id: instructor._id, email: instructor.email }, process.env.JWT_SECRET || '', { expiresIn: '1d' });
+    const refreshToken = jwt.sign({ id: instructor._id, email: instructor.email }, process.env.JWT_REFRESH_SECRET || '', { expiresIn: '7d' });
+
     return {
       token,
+      refreshToken,
       user: {
         id: instructor._id,
         email: instructor.email,
@@ -80,7 +84,7 @@ export class InstructorAuthService {
 
     const resetToken = jwt.sign({ email: instructor.email }, process.env.JWT_SECRET || '', { expiresIn: '15m' });
     const resetLink = `http://localhost:4200/instructor/reset-password/${resetToken}`;
-    console.log('Password reset link', resetLink)
+    console.log('Password reset link', resetLink);
     await this._emailService.sendPasswordResetEmail(email, resetLink);
     return {
       message: 'Password Reset Link Sent Successfully. Check your email.',

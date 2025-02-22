@@ -1,4 +1,6 @@
-import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
+import { GetObjectCommand, PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
+import { ObjectId } from 'mongoose';
 import { IInstructor, IInstructorProfileService } from 'src/interfaces/IInstructor';
 import { InstructorRepo } from 'src/repo/instructor/instructor.repo';
 
@@ -21,6 +23,24 @@ export class InstructorProfileService implements IInstructorProfileService {
   async instructorDetails(userId: string) {
     const instructor = await this._instructorRepository.findById(userId);
     return instructor;
+  }
+
+  async userImage(userId: ObjectId) {
+    const instructor = await this._instructorRepository.findById(userId);
+    if (!instructor ) {
+      throw new Error('User or profile photo not found');
+    }
+
+    const signedUrl = await getSignedUrl(
+      this._s3Client,
+      new GetObjectCommand({
+        Bucket: process.env.AWS_S3_BUCKET_NAME!,
+        Key: instructor.profilePhoto,
+      }),
+      { expiresIn: 3600 }
+    );
+
+    return signedUrl;
   }
 
   // update instructor details
@@ -60,16 +80,21 @@ export class InstructorProfileService implements IInstructorProfileService {
 
     try {
       await this._s3Client.send(new PutObjectCommand(params));
-      const photoUrl = `https://${params.Bucket}.s3.${process.env.AWS_REGION}.amazonaws.com/${params.Key}`;
-
-      const user = await this._instructorRepository.findById(userId);
-      if (!user) {
+      const signedUrl = await getSignedUrl(
+        this._s3Client,
+        new GetObjectCommand({
+          Bucket: params.Bucket,
+          Key: params.Key,
+        }),
+        { expiresIn: 3600 }
+      );
+      const instructor = await this._instructorRepository.findById(userId);
+      if (!instructor) {
         throw new Error('User not found');
       }
-      user.profilePhoto = photoUrl;
-      console.log('user after upload', user);
-      await this._instructorRepository.update(user);
-      return photoUrl;
+      instructor.profilePhoto = params.Key;
+      await this._instructorRepository.update(instructor);
+      return signedUrl;
     } catch (error) {
       console.log('Error uploading file to s3', error);
       throw new Error('File upload failed');

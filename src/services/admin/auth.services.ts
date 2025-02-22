@@ -20,8 +20,11 @@ export class AdminAuthService {
     }
 
     const token = jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET || '', { expiresIn: '1d' });
+    const refreshToken = jwt.sign({ id: user._id, email: user.email }, process.env.JWT_REFRESH_SECRET || '', { expiresIn: '7d' });
+
     return {
       token,
+      refreshToken,
       user: {
         id: user._id,
         email: user.email,

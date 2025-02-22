@@ -1,6 +1,8 @@
-import { NotificationService } from 'src/services/student/notification.services';
+import { NotificationService } from '../../services/student/notification.services';
 import { Request, Response } from 'express';
 import logger from '../../configs/logger';
+import { NotificationUpdateStatusDTO, SendNotificationMailDTO } from '../../dtos/dto';
+import { MapNotificationUpdateStatus, MapSendNotificationMail } from '../../mappers/mapper';
 
 export class NotificationController {
   private _notificationService: NotificationService;
@@ -24,7 +26,9 @@ export class NotificationController {
   // upate notification status
   async updateStatus(req: Request, res: Response) {
     try {
-      const { status } = req.body;
+      // const { status } = req.body;
+      const dto = new NotificationUpdateStatusDTO(req.body.staus)
+      const {status } = MapNotificationUpdateStatus(dto)
       const id = req.params.id;
       const updateNotification = await this._notificationService.updateNotification(id, status);
       res.status(200).json(updateNotification);
@@ -37,7 +41,9 @@ export class NotificationController {
 
   async sendNotificationMail(req: Request, res: Response) {
     try {
-      const { userId, message } = req.body;
+      // const { userId, message } = req.body;
+      const dto = new SendNotificationMailDTO(req.body)
+      const {userId, message} = MapSendNotificationMail(dto)
       await this._notificationService.sendNotificationMail(userId, message);
     } catch (error) {
       res.status(500).json({ message: 'Error sending email' });

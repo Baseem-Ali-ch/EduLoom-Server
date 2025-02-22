@@ -1,0 +1,189 @@
+2025-02-19T04:57:02.311Z [error]: Controller : Error send instructor request User  not found - Error: User  not found
+    at ProfileService.instructorReq (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\services\student\profile.services.ts:70:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ProfileController.instructorRequest (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\student\profile.controller.ts:56:7)
+2025-02-19T05:02:04.161Z [error]: Controller : Error send instructor request User  not found - Error: User  not found
+    at ProfileService.instructorReq (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\services\student\profile.services.ts:70:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ProfileController.instructorRequest (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\student\profile.controller.ts:56:7)
+2025-02-19T05:02:53.807Z [error]: Controller : Error send instructor request User  not found - Error: User  not found
+    at ProfileService.instructorReq (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\services\student\profile.services.ts:70:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ProfileController.instructorRequest (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\student\profile.controller.ts:56:7)
+2025-02-19T08:15:33.521Z [error]: Controller : Error retrieving user details User or profile photo not found - Error: User or profile photo not found
+    at ProfileService.userDetails (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\services\student\profile.services.ts:30:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ProfileController.userDetails (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\student\profile.controller.ts:15:20)
+2025-02-19T08:15:33.561Z [error]: Controller : Error retrieving user details User or profile photo not found - Error: User or profile photo not found
+    at ProfileService.userDetails (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\services\student\profile.services.ts:30:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ProfileController.userDetails (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\student\profile.controller.ts:15:20)
+2025-02-19T08:15:37.941Z [error]: Controller : Error retrieving user details User or profile photo not found - Error: User or profile photo not found
+    at ProfileService.userDetails (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\services\student\profile.services.ts:30:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ProfileController.userDetails (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\student\profile.controller.ts:15:20)
+2025-02-19T08:15:37.955Z [error]: Controller : Error retrieving user details User or profile photo not found - Error: User or profile photo not found
+    at ProfileService.userDetails (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\services\student\profile.services.ts:30:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ProfileController.userDetails (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\student\profile.controller.ts:15:20)
+2025-02-19T08:15:42.768Z [error]: Controller : Error retrieving user details User or profile photo not found - Error: User or profile photo not found
+    at ProfileService.userDetails (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\services\student\profile.services.ts:30:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ProfileController.userDetails (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\student\profile.controller.ts:15:20)
+2025-02-19T08:15:42.789Z [error]: Controller : Error retrieving user details User or profile photo not found - Error: User or profile photo not found
+    at ProfileService.userDetails (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\services\student\profile.services.ts:30:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ProfileController.userDetails (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\student\profile.controller.ts:15:20)
+2025-02-19T08:15:46.654Z [error]: Controller : Error retrieving user details User or profile photo not found - Error: User or profile photo not found
+    at ProfileService.userDetails (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\services\student\profile.services.ts:30:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ProfileController.userDetails (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\student\profile.controller.ts:15:20)
+2025-02-19T08:15:46.671Z [error]: Controller : Error retrieving user details User or profile photo not found - Error: User or profile photo not found
+    at ProfileService.userDetails (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\services\student\profile.services.ts:30:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ProfileController.userDetails (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\student\profile.controller.ts:15:20)
+2025-02-19T08:19:35.240Z [error]: Controller : Error retrieving user details User or profile photo not found - Error: User or profile photo not found
+    at ProfileService.userDetails (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\services\student\profile.services.ts:30:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ProfileController.userDetails (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\student\profile.controller.ts:15:20)
+2025-02-19T08:19:35.283Z [error]: Controller : Error retrieving user details User or profile photo not found - Error: User or profile photo not found
+    at ProfileService.userDetails (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\services\student\profile.services.ts:30:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ProfileController.userDetails (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\student\profile.controller.ts:15:20)
+2025-02-19T08:19:51.061Z [error]: Controller : Error retrieving user details User or profile photo not found - Error: User or profile photo not found
+    at ProfileService.userDetails (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\services\student\profile.services.ts:30:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ProfileController.userDetails (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\student\profile.controller.ts:15:20)
+2025-02-19T08:20:36.537Z [error]: Controller : Error retrieving user details No value provided for input HTTP label: Key. - Error: No value provided for input HTTP label: Key.
+    at resolvedPath (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\@smithy\core\dist-cjs\submodules\protocols\index.js:65:11)
+    at C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\@smithy\core\dist-cjs\submodules\protocols\index.js:124:19
+    at RequestBuilder.build (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\@smithy\core\dist-cjs\submodules\protocols\index.js:90:7)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-02-19T08:21:10.154Z [error]: Controller : Error retrieving user details No value provided for input HTTP label: Key. - Error: No value provided for input HTTP label: Key.
+    at resolvedPath (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\@smithy\core\dist-cjs\submodules\protocols\index.js:65:11)
+    at C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\@smithy\core\dist-cjs\submodules\protocols\index.js:124:19
+    at RequestBuilder.build (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\@smithy\core\dist-cjs\submodules\protocols\index.js:90:7)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-02-19T08:21:46.147Z [error]: Controller : Error retrieving user details No value provided for input HTTP label: Key. - Error: No value provided for input HTTP label: Key.
+    at resolvedPath (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\@smithy\core\dist-cjs\submodules\protocols\index.js:65:11)
+    at C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\@smithy\core\dist-cjs\submodules\protocols\index.js:124:19
+    at RequestBuilder.build (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\@smithy\core\dist-cjs\submodules\protocols\index.js:90:7)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-02-19T08:29:24.340Z [error]: Controller : Error retrieving user details User or profile photo not found - Error: User or profile photo not found
+    at ProfileService.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\services\student\profile.services.ts:35:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ProfileController.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\student\profile.controller.ts:27:25)
+2025-02-19T09:49:28.589Z [error]: Controller : Error retrieving user details User or profile photo not found - Error: User or profile photo not found
+    at InstructorProfileService.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\services\instructor\profile.services.ts:31:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async InstructorProfileController.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\instructor\profile.controller.ts:27:25)
+2025-02-19T09:51:51.394Z [error]: Controller : Error retrieving user details User or profile photo not found - Error: User or profile photo not found
+    at InstructorProfileService.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\services\instructor\profile.services.ts:31:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async InstructorProfileController.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\instructor\profile.controller.ts:27:25)
+2025-02-19T09:53:25.184Z [error]: Controller : Error retrieving user details User or profile photo not found - Error: User or profile photo not found
+    at InstructorProfileService.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\services\instructor\profile.services.ts:31:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async InstructorProfileController.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\instructor\profile.controller.ts:27:25)
+2025-02-19T09:53:31.143Z [error]: Controller : Error retrieving user details User or profile photo not found - Error: User or profile photo not found
+    at InstructorProfileService.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\services\instructor\profile.services.ts:31:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async InstructorProfileController.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\instructor\profile.controller.ts:27:25)
+2025-02-19T09:54:09.506Z [error]: Controller : Error retrieving user details User or profile photo not found - Error: User or profile photo not found
+    at InstructorProfileService.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\services\instructor\profile.services.ts:31:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async InstructorProfileController.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\instructor\profile.controller.ts:27:25)
+2025-02-19T09:54:21.307Z [error]: Controller : Error retrieving user details User or profile photo not found - Error: User or profile photo not found
+    at InstructorProfileService.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\services\instructor\profile.services.ts:31:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async InstructorProfileController.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\instructor\profile.controller.ts:27:25)
+2025-02-19T09:54:31.603Z [error]: Controller : Error retrieving user details User or profile photo not found - Error: User or profile photo not found
+    at InstructorProfileService.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\services\instructor\profile.services.ts:31:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async InstructorProfileController.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\instructor\profile.controller.ts:27:25)
+2025-02-19T09:54:36.998Z [error]: Controller : Error retrieving user details User or profile photo not found - Error: User or profile photo not found
+    at InstructorProfileService.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\services\instructor\profile.services.ts:31:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async InstructorProfileController.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\instructor\profile.controller.ts:27:25)
+2025-02-19T09:55:04.220Z [error]: Controller : Error retrieving user details User or profile photo not found - Error: User or profile photo not found
+    at InstructorProfileService.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\services\instructor\profile.services.ts:32:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async InstructorProfileController.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\instructor\profile.controller.ts:27:25)
+2025-02-19T09:56:44.109Z [error]: Controller : Error retrieving user details No value provided for input HTTP label: Key. - Error: No value provided for input HTTP label: Key.
+    at resolvedPath (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\@smithy\core\dist-cjs\submodules\protocols\index.js:65:11)
+    at C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\@smithy\core\dist-cjs\submodules\protocols\index.js:124:19
+    at RequestBuilder.build (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\@smithy\core\dist-cjs\submodules\protocols\index.js:90:7)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-02-19T09:58:45.104Z [error]: Controller : Error retrieving user details No value provided for input HTTP label: Key. - Error: No value provided for input HTTP label: Key.
+    at resolvedPath (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\@smithy\core\dist-cjs\submodules\protocols\index.js:65:11)
+    at C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\@smithy\core\dist-cjs\submodules\protocols\index.js:124:19
+    at RequestBuilder.build (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\@smithy\core\dist-cjs\submodules\protocols\index.js:90:7)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-02-19T09:59:36.066Z [error]: Controller : Error retrieving user details No value provided for input HTTP label: Key. - Error: No value provided for input HTTP label: Key.
+    at resolvedPath (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\@smithy\core\dist-cjs\submodules\protocols\index.js:65:11)
+    at C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\@smithy\core\dist-cjs\submodules\protocols\index.js:124:19
+    at RequestBuilder.build (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\@smithy\core\dist-cjs\submodules\protocols\index.js:90:7)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-02-19T09:59:40.155Z [error]: Controller : Error retrieving user details No value provided for input HTTP label: Key. - Error: No value provided for input HTTP label: Key.
+    at resolvedPath (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\@smithy\core\dist-cjs\submodules\protocols\index.js:65:11)
+    at C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\@smithy\core\dist-cjs\submodules\protocols\index.js:124:19
+    at RequestBuilder.build (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\@smithy\core\dist-cjs\submodules\protocols\index.js:90:7)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-02-19T09:59:47.545Z [error]: Controller : Error retrieving user details No value provided for input HTTP label: Key. - Error: No value provided for input HTTP label: Key.
+    at resolvedPath (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\@smithy\core\dist-cjs\submodules\protocols\index.js:65:11)
+    at C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\@smithy\core\dist-cjs\submodules\protocols\index.js:124:19
+    at RequestBuilder.build (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\@smithy\core\dist-cjs\submodules\protocols\index.js:90:7)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-02-19T09:59:49.396Z [error]: Controller : Error retrieving user details No value provided for input HTTP label: Key. - Error: No value provided for input HTTP label: Key.
+    at resolvedPath (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\@smithy\core\dist-cjs\submodules\protocols\index.js:65:11)
+    at C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\@smithy\core\dist-cjs\submodules\protocols\index.js:124:19
+    at RequestBuilder.build (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\@smithy\core\dist-cjs\submodules\protocols\index.js:90:7)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-02-19T10:00:06.790Z [error]: Controller : Error retrieving user details No value provided for input HTTP label: Key. - Error: No value provided for input HTTP label: Key.
+    at resolvedPath (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\@smithy\core\dist-cjs\submodules\protocols\index.js:65:11)
+    at C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\@smithy\core\dist-cjs\submodules\protocols\index.js:124:19
+    at RequestBuilder.build (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\@smithy\core\dist-cjs\submodules\protocols\index.js:90:7)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-02-19T10:00:09.645Z [error]: Controller : Error retrieving user details No value provided for input HTTP label: Key. - Error: No value provided for input HTTP label: Key.
+    at resolvedPath (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\@smithy\core\dist-cjs\submodules\protocols\index.js:65:11)
+    at C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\@smithy\core\dist-cjs\submodules\protocols\index.js:124:19
+    at RequestBuilder.build (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\@smithy\core\dist-cjs\submodules\protocols\index.js:90:7)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-02-19T10:00:12.942Z [error]: Controller : Error retrieving user details No value provided for input HTTP label: Key. - Error: No value provided for input HTTP label: Key.
+    at resolvedPath (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\@smithy\core\dist-cjs\submodules\protocols\index.js:65:11)
+    at C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\@smithy\core\dist-cjs\submodules\protocols\index.js:124:19
+    at RequestBuilder.build (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\@smithy\core\dist-cjs\submodules\protocols\index.js:90:7)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-02-19T10:00:36.247Z [error]: Controller : Error retrieving user details No value provided for input HTTP label: Key. - Error: No value provided for input HTTP label: Key.
+    at resolvedPath (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\@smithy\core\dist-cjs\submodules\protocols\index.js:65:11)
+    at C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\@smithy\core\dist-cjs\submodules\protocols\index.js:124:19
+    at RequestBuilder.build (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\@smithy\core\dist-cjs\submodules\protocols\index.js:90:7)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-02-19T10:07:55.510Z [error]: Controller : Error retrieving user details User or profile photo not found - Error: User or profile photo not found
+    at ProfileService.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\services\admin\profile.services.ts:31:15)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ProfileController.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\admin\profile.controller.ts:27:25)
+2025-02-19T10:07:55.538Z [error]: Controller : Error retrieving user details User or profile photo not found - Error: User or profile photo not found
+    at ProfileService.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\services\student\profile.services.ts:35:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ProfileController.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\student\profile.controller.ts:27:25)
+2025-02-19T10:08:01.271Z [error]: Controller : Error retrieving user details User or profile photo not found - Error: User or profile photo not found
+    at ProfileService.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\services\admin\profile.services.ts:31:15)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ProfileController.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\admin\profile.controller.ts:27:25)
+2025-02-19T10:08:01.282Z [error]: Controller : Error retrieving user details User or profile photo not found - Error: User or profile photo not found
+    at ProfileService.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\services\student\profile.services.ts:35:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ProfileController.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\student\profile.controller.ts:27:25)
+2025-02-19T10:11:00.058Z [error]: Controller : Error retrieving user details User or profile photo not found - Error: User or profile photo not found
+    at ProfileService.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\services\student\profile.services.ts:35:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ProfileController.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\student\profile.controller.ts:27:25)
+2025-02-19T10:11:05.021Z [error]: Controller : Error retrieving user details User or profile photo not found - Error: User or profile photo not found
+    at ProfileService.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\services\student\profile.services.ts:35:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ProfileController.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\student\profile.controller.ts:27:25)
+2025-02-19T10:11:05.065Z [error]: Controller : Error retrieving user details User or profile photo not found - Error: User or profile photo not found
+    at ProfileService.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\services\student\profile.services.ts:35:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ProfileController.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\student\profile.controller.ts:27:25)

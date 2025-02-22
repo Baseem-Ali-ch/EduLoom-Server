@@ -1,6 +1,8 @@
 import { ProfileService } from 'src/services/student/profile.services';
 import { Response } from 'express';
 import logger from '../../configs/logger';
+import { ChangePasswordDTO, InstructoInfoDTO, UpdateUserDTO } from '../../dtos/dto';
+import { MapChangePassword, MapInstructorRequest, MapUpdateUser } from '../../mappers/mapper';
 
 export class ProfileController {
   private _profileService: ProfileService;
@@ -21,10 +23,24 @@ export class ProfileController {
     }
   }
 
+  async userImage(req: any, res: Response) {
+    try {
+      const userId = req.userId;
+      const signedUrl = await this._profileService.userImage(userId);
+      res.status(200).json({ signedUrl });
+    } catch (error) {
+      console.log('Failed to get user details', error);
+      logger.error('Controller : Error retrieving user details', error);
+      res.status(500).json({ message: 'Error retrieving user details' });
+    }
+  }
+
   // update user details
   async updateUser(req: any, res: Response) {
     try {
-      const { userName, phone } = req.body;
+      // const { userName, phone } = req.body;
+      const dto = new UpdateUserDTO(req.body)
+      const {userName, phone} = MapUpdateUser(dto)
       const userId = req.userId;
       const user = await this._profileService.updateUserDetails(userId, userName, phone);
       res.status(200).json({ message: 'Profile updated successfully', user });
@@ -38,7 +54,9 @@ export class ProfileController {
   // chagne user password
   async changePassword(req: any, res: Response) {
     try {
-      const { currentPassword, newPassword } = req.body;
+      // const { currentPassword, newPassword } = req.body;
+      const dto = new ChangePasswordDTO(req.body)
+      const { currentPassword, newPassword } = MapChangePassword(dto)
       const userId = req.userId;
       await this._profileService.changePassword(userId, currentPassword, newPassword);
       res.status(200).json({ message: 'Password changed successfully' });
@@ -53,7 +71,9 @@ export class ProfileController {
   async instructorRequest(req: any, res: Response) {
     try {
       const userId = req.userId;
-      await this._profileService.instructorReq(req.body, userId);
+      const dto = new InstructoInfoDTO(req.body)
+      const instructorData = MapInstructorRequest(dto)
+      await this._profileService.instructorReq(instructorData, userId);
       res.status(200).json({ message: 'Request sent successfully' });
     } catch (error) {
       console.log('Failed to send request', error);
@@ -65,8 +85,6 @@ export class ProfileController {
   // profile photo update
   async uploadProfile(req: any, res: Response): Promise<void> {
     try {
-      console.log('req', req.file)
-      console.log('userid', req.userId)
       const userId = req.userId
       if (!req.file) {
         res.status(400).json({ message: 'No file uploaded' });

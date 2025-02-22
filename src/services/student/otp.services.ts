@@ -17,6 +17,6 @@ export class OTPService implements IOTPService{
   }
 
   validateOTPExpiry(expiresAt: Date): boolean {
-    return expiresAt > new Date(); // Check if the OTP is still valid
+    return expiresAt > new Date();
   }
 }

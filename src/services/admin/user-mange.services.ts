@@ -17,7 +17,7 @@ export class UserMangeService implements IUserManageService{
 
   async changeStatus(userId: string, status: boolean) {
     console.log('user id', userId, status);
-    const changed = await this._adminRepository.findByIdAndUpdate(userId, status);
+    const changed = await this._adminRepository.updateById(userId, {isActive: status});
     return changed;
   }
 }

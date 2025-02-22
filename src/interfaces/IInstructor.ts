@@ -4,7 +4,7 @@ export interface IInstructor {
   _id?: ObjectId;
   userName: string;
   userId?: ObjectId;
-  email: string;
+  email?: string;
   phone?: string;
   country?: string;
   state?: string;

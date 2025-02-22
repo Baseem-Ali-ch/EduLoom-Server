@@ -1,9 +1,10 @@
-import { UserRepo } from 'src/repo/student/student.repo';
+import { UserRepo } from '../../repo/student/student.repo';
 import { OTPService } from './otp.services';
 import { EmailService } from './email.services';
-import { GoogleUser, IUser, OTPDetails } from 'src/interfaces/IUser';
+import { GoogleUser, IUser, OTPDetails } from '../../interfaces/IUser';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import { verifyGoogleToken } from '../../middlewares/googleAuth.middleware';
+import bcrypt from 'bcrypt';
 
 export class AuthService {
   private _userRepository: UserRepo;
@@ -51,15 +52,16 @@ export class AuthService {
       throw new Error('Invalid or expired OTP');
     }
 
-    const newUser = await this._userRepository.createUser({
+    const salt = await bcrypt.genSalt(10);
+    storedUser.password = await bcrypt.hash(storedUser.password, salt);
+    console.log('stored user', storedUser);
+    const newUser = await this._userRepository.create({
       userName: storedUser.userName,
       email,
       password: storedUser.password,
       isActive: true,
       isVerified: true,
     });
-
-
     delete this._userStore[email];
 
     if (!newUser) {
@@ -67,8 +69,11 @@ export class AuthService {
     }
 
     const token = jwt.sign({ id: newUser._id, email: newUser.email }, process.env.JWT_SECRET || '', { expiresIn: '1d' });
+    const refreshToken = jwt.sign({ id: newUser._id, email: newUser.email }, process.env.JWT_REFRESH_SECRET || '', { expiresIn: '7d' });
+
     return {
       token,
+      refreshToken,
       user: {
         id: newUser._id,
         email: newUser.email,
@@ -99,9 +104,9 @@ export class AuthService {
       throw new Error('Invalid credentials');
     }
 
-    const isActive = await this._userRepository.findStatus(user)
-    if(!isActive){
-      throw new Error('User is not active')
+    const result = await this._userRepository.findStatus(user);
+    if (result?.isActive === false) {
+      throw new Error('User is blocked');
     }
 
     const isPasswordValid = await this._userRepository.passwordCompare(password, user.password);
@@ -110,8 +115,10 @@ export class AuthService {
     }
 
     const token = jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET || '', { expiresIn: '1d' });
+    const refreshToken = jwt.sign({ id: user._id, email: user.email }, process.env.JWT_REFRESH_SECRET || '', { expiresIn: '7d' });
     return {
       token,
+      refreshToken,
       user: {
         id: user._id,
         email: user.email,
@@ -129,7 +136,7 @@ export class AuthService {
 
     const resetToken = jwt.sign({ email: user.email }, process.env.JWT_SECRET || '', { expiresIn: '15m' });
     const resetLink = `http://localhost:4200/student/reset-password/${resetToken}`;
-    console.log('Password reset link', resetLink)
+    console.log('Password reset link', resetLink);
     await this._emailService.sendPasswordResetEmail(email, resetLink);
     return {
       message: 'Password Reset Link Sent Successfully. Check your email.',

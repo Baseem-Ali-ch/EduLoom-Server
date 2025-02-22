@@ -1,8 +1,9 @@
 // src/controllers/student/registration.controller.ts
 import { Request, Response } from 'express';
 import { AuthService } from '../../services/student/auth.services';
-import { IUser } from 'src/interfaces/IUser';
 import logger from '../../configs/logger';
+import { ForgetPasswordDTO, GoogleAuthDTO, LoginDTO, RegisterDTO, ResendOtpDTO, ResetPasswordDTO, VerifyOtpDTO } from '../../dtos/dto';
+import { MapForgetPassword, MapGoogleAuth, MapLogin, MapRegister, MapResendOtp, MapResetPassword, MapVerifyOtp } from '../../mappers/mapper';
 
 export class AuthController {
   private _authService: AuthService;
@@ -14,9 +15,10 @@ export class AuthController {
   // registration
   async register(req: Request, res: Response) {
     try {
-      console.log('');
-      const { user } = req.body;
-      const result = await this._authService.register(user as IUser);
+      // const { user } = req.body;
+      const dto = new RegisterDTO(req.body.user);
+      const userModel = MapRegister(dto);
+      const result = await this._authService.register(userModel);
       res.status(201).json(result);
     } catch (error) {
       console.error('Error during registration:', error);
@@ -28,7 +30,9 @@ export class AuthController {
   // verify otp
   async verifyOtp(req: Request, res: Response) {
     try {
-      const { email, otp } = req.body;
+      // const { email, otp } = req.body;
+      const dto = new VerifyOtpDTO(req.body)
+      const {email, otp} = MapVerifyOtp(dto)
       const result = await this._authService.verifyOTP(email, otp);
       res.status(200).json(result);
     } catch (error) {
@@ -41,7 +45,9 @@ export class AuthController {
   // resend otp
   async resendotp(req: Request, res: Response) {
     try {
-      const { email } = req.body;
+      // const { email } = req.body;
+      const dto = new ResendOtpDTO(req.body)
+      const {email} = MapResendOtp(dto)
       const result = await this._authService.resendOTP(email);
       res.status(200).json(result);
     } catch (error) {
@@ -54,20 +60,25 @@ export class AuthController {
   // login
   async login(req: Request, res: Response) {
     try {
-      const { email, password } = req.body;
+      // const { email, password } = req.body;
+      const dto = new LoginDTO(req.body)
+      const {email, password} = MapLogin(dto)
       const result = await this._authService.login(email, password);
+
       res.status(201).json(result);
     } catch (error) {
       console.log('failed to login', error);
       logger.error('Controller : Error during login', error);
-      res.status(500).json({ message: 'Error during login' });
+      res.status(500).json({ message: error.message });
     }
   }
 
   // forget password
   async forgetPassword(req: Request, res: Response) {
     try {
-      const { email } = req.body;
+      // const { email } = req.body;
+      const dto = new ForgetPasswordDTO(req.body)
+      const {email} = MapForgetPassword(dto)
       const result = await this._authService.forgetPassword(email);
       res.status(200).json(result);
     } catch (error) {
@@ -80,7 +91,9 @@ export class AuthController {
   // reset password
   async resetPassword(req: Request, res: Response) {
     try {
-      const { token, password } = req.body;
+      // const { token, password } = req.body;
+      const dto = new ResetPasswordDTO(req.body)
+      const {token, password} = MapResetPassword(dto)
 
       const result = await this._authService.resetPassword(token, password);
       res.status(200).json(result);
@@ -94,7 +107,9 @@ export class AuthController {
   // login with google
   async googleAuth(req: Request, res: Response) {
     try {
-      const { token } = req.body;
+      // const { token } = req.body;
+      const dto = new GoogleAuthDTO(req.body)
+      const {token} = MapGoogleAuth(dto)
       const result = await this._authService.googleAuth(token);
       res.status(200).json(result);
     } catch (error) {

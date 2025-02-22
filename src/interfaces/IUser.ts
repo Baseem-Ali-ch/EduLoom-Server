@@ -14,6 +14,15 @@ export interface IUser {
   isAdmin?: boolean;
 }
 
+export interface INotification {
+  userId: ObjectId
+  title: string
+  message: string
+  description: string
+  status: string
+}
+
+
 export interface OTPDetails {
   code: string;
   expiresAt: Date;

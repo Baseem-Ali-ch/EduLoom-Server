@@ -47,9 +47,10 @@ userRouter.post('/google-auth', (req, res) => authController.googleAuth(req, res
 
 // profile routes
 userRouter.get('/getUser', verifyToken, (req, res) => profileController.userDetails(req, res));
+userRouter.get('/getImage', verifyToken, (req, res) => profileController.userImage(req, res));
 userRouter.put('/profileUpdate', verifyToken, (req, res) => profileController.updateUser(req, res));
 // userRouter.post('/profile-photo', verifyToken, (req, res) => profileController.uploadProfile(req, res)
-userRouter.post('/profile-photo',verifyToken, upload.single('profilePhoto'), (req, res) => profileController.uploadProfile(req, res));
+userRouter.post('/profile-photo', verifyToken, upload.single('profilePhoto'), (req, res) => profileController.uploadProfile(req, res));
 userRouter.post('/change-password', verifyToken, (req, res) => profileController.changePassword(req, res));
 userRouter.post('/instructor-request', verifyToken, (req, res) => profileController.instructorRequest(req, res));
 

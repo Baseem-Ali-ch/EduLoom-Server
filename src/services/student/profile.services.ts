@@ -3,7 +3,8 @@ import { IInstructor } from '../../interfaces/IInstructor';
 import { IProfileService } from '../../interfaces/IUser';
 import { InstructorRepo } from '../../repo/student/instructor.repo';
 import { UserRepo } from '../../repo/student/student.repo';
-import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
+import { GetObjectCommand, PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 
 export class ProfileService implements IProfileService {
   private _userRepository: UserRepo;
@@ -28,6 +29,24 @@ export class ProfileService implements IProfileService {
     return user;
   }
 
+  async userImage(userId: ObjectId) {
+    const user = await this._userRepository.findById(userId);
+    if (!user || !user.profilePhoto) {
+      throw new Error('User or profile photo not found');
+    }
+
+    const signedUrl = await getSignedUrl(
+      this._s3Client,
+      new GetObjectCommand({
+        Bucket: process.env.AWS_S3_BUCKET_NAME!,
+        Key: user.profilePhoto,
+      }),
+      { expiresIn: 3600 }
+    );
+
+    return signedUrl;
+  }
+
   // update user details
   async updateUserDetails(userId: ObjectId, userName: string, phone: string) {
     const user = await this._userRepository.findById(userId);
@@ -38,7 +57,7 @@ export class ProfileService implements IProfileService {
     user.userName = userName;
     user.phone = phone;
 
-    const updatedUser = await this._userRepository.updateUser(user);
+    const updatedUser = await this._userRepository.update(user);
     return updatedUser;
   }
 
@@ -65,7 +84,7 @@ export class ProfileService implements IProfileService {
     if (!userId) {
       throw new Error('User  ID is required');
     }
-    const user = await this._instructorRepository.findById(userId);
+    const user = await this._userRepository.findById(userId);
     if (!user) {
       throw new Error('User  not found');
     }
@@ -91,7 +110,7 @@ export class ProfileService implements IProfileService {
       lastWorkingPlace,
       specialization,
     };
-    await this._instructorRepository.createInstructor(instructorData);
+    await this._instructorRepository.create(instructorData);
   }
 
   async uploadFileToS3(file: Express.Multer.File, userId: ObjectId) {
@@ -104,16 +123,23 @@ export class ProfileService implements IProfileService {
 
     try {
       await this._s3Client.send(new PutObjectCommand(params));
-      const photoUrl = `https://${params.Bucket}.s3.${process.env.AWS_REGION}.amazonaws.com/${params.Key}`;
+
+      const signedUrl = await getSignedUrl(
+        this._s3Client,
+        new GetObjectCommand({
+          Bucket: params.Bucket,
+          Key: params.Key,
+        }),
+        { expiresIn: 3600 }
+      );
 
       const user = await this._userRepository.findById(userId);
       if (!user) {
         throw new Error('User not found');
       }
-      user.profilePhoto = photoUrl;
-      console.log('user after upload', user)
-      await this._userRepository.updateUser(user);
-      return photoUrl;
+      user.profilePhoto = params.Key;
+      await this._userRepository.update(user);
+      return signedUrl;
     } catch (error) {
       console.log('Error uploading file to s3', error);
       throw new Error('File upload failed');

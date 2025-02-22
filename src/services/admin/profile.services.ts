@@ -1,4 +1,6 @@
-import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
+import { GetObjectCommand, PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
+import { ObjectId } from 'mongoose';
 import { IProfileService } from 'src/interfaces/IAdmin';
 import { AdminRepo } from 'src/repo/admin/admin.repo';
 
@@ -22,6 +24,24 @@ export class ProfileService implements IProfileService{
     const user = await this._adminRepository.findById(adminId);
     return user;
   }
+
+  async userImage(userId: ObjectId) {
+      const user = await this._adminRepository.findById(userId);
+      if (!user || !user.profilePhoto) {
+        throw new Error('User or profile photo not found');
+      }
+  
+      const signedUrl = await getSignedUrl(
+        this._s3Client,
+        new GetObjectCommand({
+          Bucket: process.env.AWS_S3_BUCKET_NAME!,
+          Key: user.profilePhoto,
+        }),
+        { expiresIn: 3600 }
+      );
+  
+      return signedUrl;
+    }
 
   // update user details
   async updateAdminDetails(adminId: string, userName: string, phone: string) {

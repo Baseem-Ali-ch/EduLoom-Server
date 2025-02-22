@@ -40,6 +40,7 @@ adminRouter.post('/login', (req, res) => authController.login(req, res));
 
 // profile routes
 adminRouter.get('/getUser', verifyToken, (req, res) => profileController.adminDetails(req, res));
+adminRouter.get('/getImage', verifyToken, (req, res) => profileController.userImage(req, res));
 adminRouter.put('/profileUpdate', verifyToken, (req, res) => profileController.updateAdmin(req, res));
 adminRouter.post('/profile-photo',verifyToken, upload.single('profilePhoto'), (req, res) => profileController.uploadProfile(req, res));
 adminRouter.post('/change-password', verifyToken, (req, res) => profileController.changePassword(req, res));

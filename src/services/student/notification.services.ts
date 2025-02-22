@@ -24,7 +24,7 @@ export class NotificationService implements INotificationService{
     return notification;
   }
 
-  async sendNotificationMail(userId: ObjectId, message: string) {
+  async sendNotificationMail(userId: ObjectId | string, message: string) {
     const user = await this._notificationRepository.findById(userId);
 
     if (!user) {
