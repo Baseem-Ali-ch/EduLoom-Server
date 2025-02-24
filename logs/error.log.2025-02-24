@@ -1,0 +1,5 @@
+2025-02-24T05:43:20.339Z [error]: Controller : Error creating offer Course validation failed: price: Path `price` is required., difficultyLevel: Path `difficultyLevel` is required., category: Path `category` is required. - ValidationError: Course validation failed: price: Path `price` is required., difficultyLevel: Path `difficultyLevel` is required., category: Path `category` is required.
+    at model.Document.invalidate (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\mongoose\lib\document.js:3334:32)
+    at C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\mongoose\lib\document.js:3095:17
+    at C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\mongoose\lib\schemaType.js:1407:9
+    at processTicksAndRejections (node:internal/process/task_queues:77:11)

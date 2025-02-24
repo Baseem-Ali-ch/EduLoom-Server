@@ -133,3 +133,121 @@ export class InstructoInfoDTO {
     this.specialization = data.specialization || '';
   }
 }
+
+export class LessonDTO {
+  title: string;
+  content: string;
+  document: string;
+
+  constructor(data: Partial<LessonDTO>) {
+    this.title = data.title || '';
+    this.content = data.content || '';
+    this.document = data.document || '';
+  }
+}
+
+export class ModuleDTO {
+  title: string;
+  lessons: LessonDTO[];
+
+  constructor(data: Partial<ModuleDTO>) {
+    this.title = data.title || '';
+    this.lessons = data.lessons?.map((lesson) => new LessonDTO(lesson)) || [];
+  }
+}
+
+export class AssignmentDTO {
+  assignmentTitle: string;
+  assignmentDescription: string;
+
+  constructor(data: Partial<AssignmentDTO>) {
+    this.assignmentTitle = data.assignmentTitle || '';
+    this.assignmentDescription = data.assignmentDescription || '';
+  }
+}
+
+export class QuizOptionDTO {
+  optionText: string;
+  isCorrect: boolean;
+
+  constructor(data: Partial<QuizOptionDTO>) {
+    this.optionText = data.optionText || '';
+    this.isCorrect = data.isCorrect || false;
+  }
+}
+
+export class QuizQuestionDTO {
+  questionText: string;
+  options: QuizOptionDTO[];
+
+  constructor(data: Partial<QuizQuestionDTO>) {
+    this.questionText = data.questionText || '';
+    this.options = data.options?.map((option) => new QuizOptionDTO(option)) || [];
+  }
+}
+
+export class QuizDTO {
+  title: string;
+  questions: QuizQuestionDTO[];
+
+  constructor(data: Partial<QuizDTO>) {
+    this.title = data.title || '';
+    this.questions = data.questions?.map((question) => new QuizQuestionDTO(question)) || [];
+  }
+}
+
+export class LiveClassDTO {
+  title: string;
+  scheduleDate: string;
+  duration: string;
+  meetingLink: string;
+  description: string;
+
+  constructor(data: Partial<LiveClassDTO>) {
+    this.title = data.title || '';
+    this.scheduleDate = data.scheduleDate || '';
+    this.duration = data.duration || '';
+    this.meetingLink = data.meetingLink || '';
+    this.description = data.description || '';
+  }
+}
+
+export class CourseDTO {
+  title: string;
+  description: string;
+  category: string;
+  difficultyLevel: string;
+  price: string;
+  modules: ModuleDTO[];
+  assignments: AssignmentDTO[];
+  quizzes: QuizDTO[];
+  liveClasses: LiveClassDTO[];
+  instructorId: ObjectId | null
+
+  constructor(data: Partial<CourseDTO>) {
+    this.title = data.title || '';
+    this.description = data.description || '';
+    this.category = data.category || '';
+    this.difficultyLevel = data.difficultyLevel || '';
+    this.price = data.price || '';
+    this.modules = data.modules?.map((module) => new ModuleDTO(module)) || [];
+    this.assignments = data.assignments?.map((assignment) => new AssignmentDTO(assignment)) || [];
+    this.quizzes = data.quizzes?.map((quiz) => new QuizDTO(quiz)) || [];
+    this.liveClasses = data.liveClasses?.map((liveClass) => new LiveClassDTO(liveClass)) || [];
+    this.instructorId = data.instructorId || null
+  }
+}
+
+export class OfferDTO{
+  title: string
+  description : string
+  discount : number
+  status: boolean
+
+  constructor(data: Partial<OfferDTO>){
+    this.title = data.title || ''
+    this.description = data.description || ''
+    this.discount = data.discount || 0
+    this.status = data.status || false
+  }
+}

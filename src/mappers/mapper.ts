@@ -1,10 +1,13 @@
+import { ObjectId } from 'mongoose';
 import {
   ChangePasswordDTO,
+  CourseDTO,
   ForgetPasswordDTO,
   GoogleAuthDTO,
   InstructoInfoDTO,
   LoginDTO,
   NotificationUpdateStatusDTO,
+  OfferDTO,
   RegisterDTO,
   ResendOtpDTO,
   ResetPasswordDTO,
@@ -106,4 +109,54 @@ export function MapInstructorRequest(dto: InstructoInfoDTO) {
     lastWorkingPlace: dto.lastWorkingPlace,
     specialization: dto.specialization,
   };
+}
+
+export function MapCourse(dto: CourseDTO, instructorId: ObjectId) {
+  return {
+    title: dto.title,
+    description: dto.description,
+    category: dto.category,
+    difficultyLevel: dto.difficultyLevel,
+    price: dto.price,
+    modules: dto.modules.map((module) => ({
+      title: module.title,
+      lessons: module.lessons.map((lesson) => ({
+        title: lesson.title,
+        content: lesson.content,
+        document: lesson.document,
+      })),
+    })),
+    assignments: dto.assignments.map((assignment) => ({
+      assignmentTitle: assignment.assignmentTitle,
+      assignmentDescription: assignment.assignmentDescription,
+    })),
+    quizzes: dto.quizzes.map((quiz) => ({
+      title: quiz.title,
+      questions: quiz.questions.map((question) => ({
+        questionText: question.questionText,
+        options: question.options.map((option) => ({
+          optionText: option.optionText,
+          isCorrect: option.isCorrect,
+        })),
+      })),
+    })),
+    liveClasses: dto.liveClasses.map((liveClass) => ({
+      title: liveClass.title,
+      scheduleDate: liveClass.scheduleDate,
+      duration: liveClass.duration,
+      meetingLink: liveClass.meetingLink,
+      description: liveClass.description,
+    })),
+    instructorId: instructorId
+  };
+}
+
+
+export function MapOffer(dto: OfferDTO){
+  return {
+    title: dto.title,
+    description: dto.description,
+    discount : dto.discount,
+    status: dto.status
+  }
 }

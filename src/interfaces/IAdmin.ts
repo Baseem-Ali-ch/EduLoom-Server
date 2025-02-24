@@ -29,3 +29,4 @@ export interface IUserManageService {
   allUserDetails(limit: number, skip: number): Promise<{ allUsers: IUser[]; totalUsers: number }>;
   changeStatus(userId: string, status: boolean): Promise<IUser | null>;
 }
+

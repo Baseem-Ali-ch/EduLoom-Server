@@ -7,20 +7,22 @@ import { verifyToken } from '../middlewares/auth.middleware';
 import { InstructorProfileController } from '../controllers/instructor/profile.controller';
 import { InstructorProfileService } from '../services/instructor/profile.services';
 import upload from '../configs/multer';
-// import { instructorCourseController } from '../controllers/instructor/course.controller';
-// import { instructorCourseService } from '../services/instructor/course.services';
+import { instructorCourseController } from '../controllers/instructor/course.controller';
+import { instructorCourseService } from '../services/instructor/course.services';
+import { CourseRepo } from '../repo/instructor/course.repo';
 
 export const instructorRouter = express.Router()
 
 // Repository dependencies
 const instructorRepo = new InstructorRepo()
+const courseRepo = new CourseRepo()
 
 // Service dependencies
 const emailService = new EmailService()
 const instructorAuthService = new InstructorAuthService(instructorRepo, emailService);
 const profileService = new InstructorProfileService(instructorRepo);
 // const notificationService = new NotificationService(notificationRepo, emailService);
-// const courseService = new instructorCourseService()
+const courseService = new instructorCourseService(courseRepo)
 
 // register controller
 const authController = new InstructorAuthController(instructorAuthService)
@@ -32,7 +34,7 @@ const profileController = new InstructorProfileController(profileService);
 // const notificationController = new NotificationController(notificationService);
 
 // course controller
-// const courseController = new instructorCourseController()
+const courseController = new instructorCourseController(courseService)
 
 // authenticaiton routes
 instructorRouter.post('/register', (req, res) => authController.register(req, res));
@@ -49,4 +51,4 @@ instructorRouter.post('/change-password', verifyToken, (req, res) => profileCont
 
 
 // course routes
-// instructorRouter.post('/create-course', (req, res) => courseController.createCourse(req, res))
+instructorRouter.post('/create-course', verifyToken, (req, res) => courseController.createCourse(req, res))
