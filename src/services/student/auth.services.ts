@@ -103,6 +103,7 @@ export class AuthService {
     if (!user) {
       throw new Error('Invalid credentials');
     }
+    console.log('user det', user)
 
     const result = await this._userRepository.findStatus(user);
     if (result?.isActive === false) {

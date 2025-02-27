@@ -67,6 +67,9 @@ export interface ICourse {
   assignments: Assignment[];
   quizzes: Quiz[];
   liveClasses: LiveClass[];
+  instructorId: ObjectId | null
+  offer : ObjectId | null
+  coupon: ObjectId | null
 }
 
 export interface IInstructorAuthService {

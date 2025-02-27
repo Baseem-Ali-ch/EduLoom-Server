@@ -78,6 +78,10 @@ const CourseSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Instructor',
     },
+    isActive: {
+      type: Boolean,
+      defauld: true
+    }
   },
   {
     timestamps: true,

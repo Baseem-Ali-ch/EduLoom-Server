@@ -1,5 +1,6 @@
 import { IUser } from './IUser';
 import { IInstructor } from './IInstructor';
+import { IOffer } from './ICourse';
 
 export interface IAdminRepo {
   findByEmail(email: string): Promise<IUser | null>;
@@ -29,4 +30,10 @@ export interface IUserManageService {
   allUserDetails(limit: number, skip: number): Promise<{ allUsers: IUser[]; totalUsers: number }>;
   changeStatus(userId: string, status: boolean): Promise<IUser | null>;
 }
+
+// export interface ICourseManageService{
+//   getOffers(): Promise<IOffer[]>
+//   addOffer(offerData: IOffer):Promise<IOffer>
+//   changeStatus(userId: string, status: boolean): Promise<>
+// }
 

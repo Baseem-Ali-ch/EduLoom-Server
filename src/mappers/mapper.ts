@@ -1,6 +1,7 @@
 import { ObjectId } from 'mongoose';
 import {
   ChangePasswordDTO,
+  CouponDTO,
   CourseDTO,
   ForgetPasswordDTO,
   GoogleAuthDTO,
@@ -123,7 +124,7 @@ export function MapCourse(dto: CourseDTO, instructorId: ObjectId) {
       lessons: module.lessons.map((lesson) => ({
         title: lesson.title,
         content: lesson.content,
-        document: lesson.document,
+        document: typeof lesson.document === 'string' ? lesson.document : undefined,
       })),
     })),
     assignments: dto.assignments.map((assignment) => ({
@@ -147,16 +148,30 @@ export function MapCourse(dto: CourseDTO, instructorId: ObjectId) {
       meetingLink: liveClass.meetingLink,
       description: liveClass.description,
     })),
-    instructorId: instructorId
+    instructorId: instructorId,
+    offer: dto.offer,
+    coupon: dto.coupon,
+    isActive: dto.isActive
   };
 }
 
-
-export function MapOffer(dto: OfferDTO){
+export function MapOffer(dto: OfferDTO) {
   return {
     title: dto.title,
     description: dto.description,
-    discount : dto.discount,
-    status: dto.status
-  }
+    discount: dto.discount,
+    status: dto.status,
+  };
+}
+
+export function MapCoupon(dto: CouponDTO) {
+  return {
+    couponCode: dto.couponCode,
+    description: dto.description,
+    discount: dto.discount,
+    expDate: dto.expDate,
+    minPurAmt: dto.minPurAmt,
+    maxPurAmt: dto.maxPurAmt,
+    status: dto.status,
+  };
 }

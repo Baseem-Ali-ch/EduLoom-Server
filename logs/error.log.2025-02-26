@@ -1,0 +1,85 @@
+2025-02-26T00:46:05.953Z [error]: Controller : Error retrieving user details User or profile photo not found - Error: User or profile photo not found
+    at ProfileService.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\services\student\profile.services.ts:35:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ProfileController.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\student\profile.controller.ts:29:25)
+2025-02-26T01:31:56.473Z [error]: Controller : Error retrieving user details User or profile photo not found - Error: User or profile photo not found
+    at ProfileService.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\services\student\profile.services.ts:35:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ProfileController.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\student\profile.controller.ts:29:25)
+2025-02-26T01:31:58.514Z [error]: Controller : Error retrieving user details User or profile photo not found - Error: User or profile photo not found
+    at ProfileService.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\services\student\profile.services.ts:35:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ProfileController.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\student\profile.controller.ts:29:25)
+2025-02-26T05:39:01.574Z [error]: Error during course creation Cannot read properties of undefined (reading 'length') - TypeError: Cannot read properties of undefined (reading 'length')
+    at C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\instructor\course.controller.ts:36:52
+    at Array.forEach (<anonymous>)
+    at C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\instructor\course.controller.ts:35:24
+    at Array.forEach (<anonymous>)
+    at instructorCourseController.createCourse (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\instructor\course.controller.ts:34:26)
+    at C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\routes\instructor.router.ts:53:116
+    at Layer.handle [as handle_request] (C:\Users\HP\Desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\HP\Desktop\node_modules\express\lib\router\route.js:149:13)
+    at multerMiddleware (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\multer\lib\make-middleware.js:13:41)
+    at Layer.handle [as handle_request] (C:\Users\HP\Desktop\node_modules\express\lib\router\layer.js:95:5)
+2025-02-26T09:32:13.932Z [error]: Error during course creation Cannot read properties of undefined (reading 'title') - TypeError: Cannot read properties of undefined (reading 'title')
+    at new CourseDTO (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\dtos\dto.ts:230:23)
+    at instructorCourseController.createCourse (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\instructor\course.controller.ts:29:19)
+    at C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\routes\instructor.router.ts:53:116
+    at Layer.handle [as handle_request] (C:\Users\HP\Desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\HP\Desktop\node_modules\express\lib\router\route.js:149:13)
+    at multerMiddleware (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\multer\lib\make-middleware.js:13:41)
+    at Layer.handle [as handle_request] (C:\Users\HP\Desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\HP\Desktop\node_modules\express\lib\router\route.js:149:13)
+    at verifyToken (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\middlewares\auth.middleware.ts:18:5)
+    at Layer.handle [as handle_request] (C:\Users\HP\Desktop\node_modules\express\lib\router\layer.js:95:5)
+2025-02-26T14:03:57.310Z [error]: Error during course creation Failed to save course - Error: Failed to save course
+    at instructorCourseService.createCourse (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\services\instructor\course.services.ts:91:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async instructorCourseController.createCourse (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\instructor\course.controller.ts:36:22)
+2025-02-26T14:05:06.060Z [error]: Error during course creation Failed to save course - Error: Failed to save course
+    at instructorCourseService.createCourse (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\services\instructor\course.services.ts:91:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async instructorCourseController.createCourse (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\instructor\course.controller.ts:36:22)
+2025-02-26T14:26:42.004Z [error]: Error during course creation Failed to save course - Error: Failed to save course
+    at instructorCourseService.createCourse (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\services\instructor\course.services.ts:91:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async instructorCourseController.createCourse (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\instructor\course.controller.ts:36:22)
+2025-02-26T14:34:17.276Z [error]: Controller : Error retrieving user details User or profile photo not found - Error: User or profile photo not found
+    at ProfileService.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\services\student\profile.services.ts:35:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ProfileController.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\student\profile.controller.ts:29:25)
+2025-02-26T14:34:20.099Z [error]: Controller : Error retrieving user details User or profile photo not found - Error: User or profile photo not found
+    at ProfileService.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\services\student\profile.services.ts:35:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ProfileController.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\student\profile.controller.ts:29:25)
+2025-02-26T14:34:22.921Z [error]: Controller : Error retrieving user details User or profile photo not found - Error: User or profile photo not found
+    at ProfileService.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\services\student\profile.services.ts:35:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ProfileController.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\student\profile.controller.ts:29:25)
+2025-02-26T14:34:25.473Z [error]: Controller : Error retrieving user details User or profile photo not found - Error: User or profile photo not found
+    at ProfileService.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\services\student\profile.services.ts:35:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ProfileController.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\student\profile.controller.ts:29:25)
+2025-02-26T14:34:30.870Z [error]: Controller : Error retrieving user details User or profile photo not found - Error: User or profile photo not found
+    at ProfileService.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\services\student\profile.services.ts:35:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ProfileController.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\student\profile.controller.ts:29:25)
+2025-02-26T16:07:03.952Z [error]: Error during course creation File upload failed - Error: File upload failed
+    at instructorCourseService.createCourse (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\services\instructor\course.services.ts:85:15)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async instructorCourseController.createCourse (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\instructor\course.controller.ts:38:22)
+2025-02-26T16:14:44.404Z [error]: Error during course creation "[object Object]" is not valid JSON - SyntaxError: "[object Object]" is not valid JSON
+    at JSON.parse (<anonymous>)
+    at instructorCourseController.createCourse (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\instructor\course.controller.ts:36:58)
+    at C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\routes\instructor.router.ts:53:116
+    at Layer.handle [as handle_request] (C:\Users\HP\Desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\HP\Desktop\node_modules\express\lib\router\route.js:149:13)
+    at multerMiddleware (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\multer\lib\make-middleware.js:13:41)
+    at Layer.handle [as handle_request] (C:\Users\HP\Desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\HP\Desktop\node_modules\express\lib\router\route.js:149:13)
+    at verifyToken (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\middlewares\auth.middleware.ts:18:5)
+    at Layer.handle [as handle_request] (C:\Users\HP\Desktop\node_modules\express\lib\router\layer.js:95:5)
+2025-02-26T16:20:22.987Z [error]: Error during course creation Failed to save course - Error: Failed to save course
+    at instructorCourseService.createCourse (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\services\instructor\course.services.ts:95:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async instructorCourseController.createCourse (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\instructor\course.controller.ts:41:22)

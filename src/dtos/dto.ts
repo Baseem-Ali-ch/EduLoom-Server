@@ -137,12 +137,12 @@ export class InstructoInfoDTO {
 export class LessonDTO {
   title: string;
   content: string;
-  document: string;
+  document?: Express.Multer.File | string;
 
   constructor(data: Partial<LessonDTO>) {
     this.title = data.title || '';
     this.content = data.content || '';
-    this.document = data.document || '';
+    this.document = data.document
   }
 }
 
@@ -222,7 +222,10 @@ export class CourseDTO {
   assignments: AssignmentDTO[];
   quizzes: QuizDTO[];
   liveClasses: LiveClassDTO[];
-  instructorId: ObjectId | null
+  instructorId: ObjectId | null;
+  offer: ObjectId | null;
+  coupon: ObjectId | null;
+  isActive: boolean
 
   constructor(data: Partial<CourseDTO>) {
     this.title = data.title || '';
@@ -234,20 +237,43 @@ export class CourseDTO {
     this.assignments = data.assignments?.map((assignment) => new AssignmentDTO(assignment)) || [];
     this.quizzes = data.quizzes?.map((quiz) => new QuizDTO(quiz)) || [];
     this.liveClasses = data.liveClasses?.map((liveClass) => new LiveClassDTO(liveClass)) || [];
-    this.instructorId = data.instructorId || null
+    this.instructorId = data.instructorId || null;
+    this.offer = data.offer || null;
+    this.coupon = data.coupon || null;
+    this.isActive = data.isActive || true
   }
 }
 
-export class OfferDTO{
-  title: string
-  description : string
-  discount : number
-  status: boolean
+export class OfferDTO {
+  title: string;
+  description: string;
+  discount: number;
+  status: boolean;
 
-  constructor(data: Partial<OfferDTO>){
-    this.title = data.title || ''
-    this.description = data.description || ''
-    this.discount = data.discount || 0
-    this.status = data.status || false
+  constructor(data: Partial<OfferDTO>) {
+    this.title = data.title || '';
+    this.description = data.description || '';
+    this.discount = data.discount || 0;
+    this.status = data.status || false;
+  }
+}
+
+export class CouponDTO {
+  couponCode: string;
+  description: string;
+  discount: number;
+  expDate: string;
+  minPurAmt: number;
+  maxPurAmt: number;
+  status: boolean;
+
+  constructor(data: Partial<CouponDTO>) {
+    this.couponCode = data.couponCode || '';
+    this.description = data.description || '';
+    this.discount = data.discount || 0;
+    this.expDate = data.expDate || '';
+    this.minPurAmt = data.minPurAmt || 0;
+    this.maxPurAmt = data.maxPurAmt || 0;
+    this.status = data.status || false;
   }
 }

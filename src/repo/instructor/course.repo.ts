@@ -1,9 +1,13 @@
 import { Course } from '../../models/Course';
-import { ICourse} from '../../interfaces/IInstructor';
+import { ICourse } from '../../interfaces/IInstructor';
 import { BaseRepository } from '../base.repo';
 
 export class CourseRepo extends BaseRepository<ICourse> {
   constructor() {
     super(Course);
+  }
+
+  async findAllCourse(): Promise<ICourse[]> {
+    return Course.find();
   }
 }

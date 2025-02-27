@@ -1,0 +1,123 @@
+2025-02-27T01:41:37.389Z [error]: Error during course creation "[object Object]" is not valid JSON - SyntaxError: "[object Object]" is not valid JSON
+    at JSON.parse (<anonymous>)
+    at instructorCourseController.createCourse (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\instructor\course.controller.ts:36:58)
+    at C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\routes\instructor.router.ts:53:116
+    at Layer.handle [as handle_request] (C:\Users\HP\Desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\HP\Desktop\node_modules\express\lib\router\route.js:149:13)
+    at multerMiddleware (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\multer\lib\make-middleware.js:13:41)
+    at Layer.handle [as handle_request] (C:\Users\HP\Desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\HP\Desktop\node_modules\express\lib\router\route.js:149:13)
+    at verifyToken (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\middlewares\auth.middleware.ts:18:5)
+    at Layer.handle [as handle_request] (C:\Users\HP\Desktop\node_modules\express\lib\router\layer.js:95:5)
+2025-02-27T03:02:21.062Z [error]: Error during course creation "[object Object]" is not valid JSON - SyntaxError: "[object Object]" is not valid JSON
+    at JSON.parse (<anonymous>)
+    at instructorCourseController.createCourse (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\instructor\course.controller.ts:36:58)
+    at C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\routes\instructor.router.ts:53:116
+    at Layer.handle [as handle_request] (C:\Users\HP\Desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\HP\Desktop\node_modules\express\lib\router\route.js:149:13)
+    at multerMiddleware (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\multer\lib\make-middleware.js:13:41)
+    at Layer.handle [as handle_request] (C:\Users\HP\Desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\HP\Desktop\node_modules\express\lib\router\route.js:149:13)
+    at verifyToken (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\middlewares\auth.middleware.ts:18:5)
+    at Layer.handle [as handle_request] (C:\Users\HP\Desktop\node_modules\express\lib\router\layer.js:95:5)
+2025-02-27T03:04:53.116Z [error]: Error during course creation "[object Object]" is not valid JSON - SyntaxError: "[object Object]" is not valid JSON
+    at JSON.parse (<anonymous>)
+    at instructorCourseController.createCourse (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\instructor\course.controller.ts:36:58)
+    at C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\routes\instructor.router.ts:53:116
+    at Layer.handle [as handle_request] (C:\Users\HP\Desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\HP\Desktop\node_modules\express\lib\router\route.js:149:13)
+    at multerMiddleware (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\multer\lib\make-middleware.js:13:41)
+    at Layer.handle [as handle_request] (C:\Users\HP\Desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\HP\Desktop\node_modules\express\lib\router\route.js:149:13)
+    at verifyToken (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\middlewares\auth.middleware.ts:18:5)
+    at Layer.handle [as handle_request] (C:\Users\HP\Desktop\node_modules\express\lib\router\layer.js:95:5)
+2025-02-27T03:07:08.122Z [error]: Error during course creation "[object Object]" is not valid JSON - SyntaxError: "[object Object]" is not valid JSON
+    at JSON.parse (<anonymous>)
+    at instructorCourseController.createCourse (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\instructor\course.controller.ts:36:58)
+    at C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\routes\instructor.router.ts:53:116
+    at Layer.handle [as handle_request] (C:\Users\HP\Desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\HP\Desktop\node_modules\express\lib\router\route.js:149:13)
+    at multerMiddleware (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\multer\lib\make-middleware.js:13:41)
+    at Layer.handle [as handle_request] (C:\Users\HP\Desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\HP\Desktop\node_modules\express\lib\router\route.js:149:13)
+    at verifyToken (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\middlewares\auth.middleware.ts:18:5)
+    at Layer.handle [as handle_request] (C:\Users\HP\Desktop\node_modules\express\lib\router\layer.js:95:5)
+2025-02-27T03:07:26.917Z [error]: Error during course creation "[object Object]" is not valid JSON - SyntaxError: "[object Object]" is not valid JSON
+    at JSON.parse (<anonymous>)
+    at instructorCourseController.createCourse (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\instructor\course.controller.ts:36:58)
+    at C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\routes\instructor.router.ts:53:116
+    at Layer.handle [as handle_request] (C:\Users\HP\Desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\HP\Desktop\node_modules\express\lib\router\route.js:149:13)
+    at multerMiddleware (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\multer\lib\make-middleware.js:13:41)
+    at Layer.handle [as handle_request] (C:\Users\HP\Desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\HP\Desktop\node_modules\express\lib\router\route.js:149:13)
+    at verifyToken (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\middlewares\auth.middleware.ts:18:5)
+    at Layer.handle [as handle_request] (C:\Users\HP\Desktop\node_modules\express\lib\router\layer.js:95:5)
+2025-02-27T03:07:29.056Z [error]: Error during course creation "[object Object]" is not valid JSON - SyntaxError: "[object Object]" is not valid JSON
+    at JSON.parse (<anonymous>)
+    at instructorCourseController.createCourse (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\instructor\course.controller.ts:36:58)
+    at C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\routes\instructor.router.ts:53:116
+    at Layer.handle [as handle_request] (C:\Users\HP\Desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\HP\Desktop\node_modules\express\lib\router\route.js:149:13)
+    at multerMiddleware (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\multer\lib\make-middleware.js:13:41)
+    at Layer.handle [as handle_request] (C:\Users\HP\Desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\HP\Desktop\node_modules\express\lib\router\route.js:149:13)
+    at verifyToken (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\middlewares\auth.middleware.ts:18:5)
+    at Layer.handle [as handle_request] (C:\Users\HP\Desktop\node_modules\express\lib\router\layer.js:95:5)
+2025-02-27T03:07:29.769Z [error]: Error during course creation "[object Object]" is not valid JSON - SyntaxError: "[object Object]" is not valid JSON
+    at JSON.parse (<anonymous>)
+    at instructorCourseController.createCourse (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\instructor\course.controller.ts:36:58)
+    at C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\routes\instructor.router.ts:53:116
+    at Layer.handle [as handle_request] (C:\Users\HP\Desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\HP\Desktop\node_modules\express\lib\router\route.js:149:13)
+    at multerMiddleware (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\multer\lib\make-middleware.js:13:41)
+    at Layer.handle [as handle_request] (C:\Users\HP\Desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\HP\Desktop\node_modules\express\lib\router\route.js:149:13)
+    at verifyToken (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\middlewares\auth.middleware.ts:18:5)
+    at Layer.handle [as handle_request] (C:\Users\HP\Desktop\node_modules\express\lib\router\layer.js:95:5)
+2025-02-27T03:07:30.430Z [error]: Error during course creation "[object Object]" is not valid JSON - SyntaxError: "[object Object]" is not valid JSON
+    at JSON.parse (<anonymous>)
+    at instructorCourseController.createCourse (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\instructor\course.controller.ts:36:58)
+    at C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\routes\instructor.router.ts:53:116
+    at Layer.handle [as handle_request] (C:\Users\HP\Desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\HP\Desktop\node_modules\express\lib\router\route.js:149:13)
+    at multerMiddleware (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\multer\lib\make-middleware.js:13:41)
+    at Layer.handle [as handle_request] (C:\Users\HP\Desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\HP\Desktop\node_modules\express\lib\router\route.js:149:13)
+    at verifyToken (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\middlewares\auth.middleware.ts:18:5)
+    at Layer.handle [as handle_request] (C:\Users\HP\Desktop\node_modules\express\lib\router\layer.js:95:5)
+2025-02-27T03:08:00.717Z [error]: Controller : Error retrieving user details User or profile photo not found - Error: User or profile photo not found
+    at ProfileService.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\services\student\profile.services.ts:35:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ProfileController.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\student\profile.controller.ts:29:25)
+2025-02-27T10:23:26.644Z [error]: Controller : Error during login Invalid credentials - Error: Invalid credentials
+    at AuthService.login (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\services\student\auth.services.ts:114:13)
+    at async AuthController.login (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\student\auth.controller.ts:66:22)
+2025-02-27T10:23:40.408Z [error]: Controller : Error during login Invalid credentials - Error: Invalid credentials
+    at AuthService.login (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\services\student\auth.services.ts:114:13)
+    at async AuthController.login (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\student\auth.controller.ts:66:22)
+2025-02-27T10:23:56.803Z [error]: Controller : Error during login Invalid credentials - Error: Invalid credentials
+    at AuthService.login (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\services\student\auth.services.ts:114:13)
+    at async AuthController.login (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\student\auth.controller.ts:66:22)
+2025-02-27T10:24:27.676Z [error]: Controller : Error retrieving user details User or profile photo not found - Error: User or profile photo not found
+    at ProfileService.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\services\student\profile.services.ts:35:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ProfileController.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\student\profile.controller.ts:29:25)
+2025-02-27T10:25:01.675Z [error]: Controller : Error during login Invalid credentials - Error: Invalid credentials
+    at AuthService.login (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\services\student\auth.services.ts:114:13)
+    at async AuthController.login (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\student\auth.controller.ts:66:22)
+2025-02-27T10:30:39.779Z [error]: Controller : Error retrieving user details User or profile photo not found - Error: User or profile photo not found
+    at InstructorProfileService.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\services\instructor\profile.services.ts:31:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async InstructorProfileController.userImage (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\controllers\instructor\profile.controller.ts:29:25)
+2025-02-27T13:53:43.755Z [error]: Error during getDoc: Cast to ObjectId failed for value "edit67c03769dfcf2a7bcfe834a5" (type string) at path "_id" for model "Course" - CastError: Cast to ObjectId failed for value "edit67c03769dfcf2a7bcfe834a5" (type string) at path "_id" for model "Course"
+    at SchemaObjectId.cast (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\mongoose\lib\schema\objectId.js:250:11)
+    at SchemaObjectId.SchemaType.applySetters (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\mongoose\lib\schemaType.js:1255:12)
+    at SchemaObjectId.SchemaType.castForQuery (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\mongoose\lib\schemaType.js:1673:17)
+    at cast (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\mongoose\lib\cast.js:390:32)
+    at model.Query.Query.cast (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\mongoose\lib\query.js:4889:12)
+    at model.Query.Query._castConditions (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\mongoose\lib\query.js:2306:10)
+    at model.Query._findOne (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\mongoose\lib\query.js:2630:8)
+    at model.Query.exec (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\node_modules\mongoose\lib\query.js:4438:80)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async instructorCourseService.getDoc (C:\Users\HP\Desktop\Week Task\Week 22\EduLoom-Server\src\services\instructor\course.services.ts:32:20)
