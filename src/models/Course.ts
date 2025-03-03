@@ -40,6 +40,10 @@ const LiveClassSchema = new mongoose.Schema({
   meetingLink: { type: String, required: true },
 });
 
+const EnrolledStudentsSchema = new mongoose.Schema({
+  studentId: { type: String },
+});
+
 const CourseSchema = new mongoose.Schema(
   {
     title: {
@@ -64,11 +68,11 @@ const CourseSchema = new mongoose.Schema(
     },
     coupon: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Coupon'
+      ref: 'Coupon',
     },
     offer: {
       type: mongoose.Schema.Types.ObjectId,
-      ref:'Offer'
+      ref: 'Offer',
     },
     modules: [ModuleSchema],
     assignments: [AssignmentSchema],
@@ -80,8 +84,9 @@ const CourseSchema = new mongoose.Schema(
     },
     isActive: {
       type: Boolean,
-      defauld: true
-    }
+      defauld: true,
+    },
+    enrolledStudents: [EnrolledStudentsSchema],
   },
   {
     timestamps: true,

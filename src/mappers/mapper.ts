@@ -1,5 +1,6 @@
 import { ObjectId } from 'mongoose';
 import {
+  AssignmentSubmissionDTO,
   ChangePasswordDTO,
   CouponDTO,
   CourseDTO,
@@ -174,4 +175,13 @@ export function MapCoupon(dto: CouponDTO) {
     maxPurAmt: dto.maxPurAmt,
     status: dto.status,
   };
+}
+
+export function MapAssignmentSubmission(dto: AssignmentSubmissionDTO){
+  return {
+    courseId: dto.courseId,
+    assignmentId: dto.assignmentId,
+    studentId: dto.studentId,
+    link: dto.link
+  }
 }

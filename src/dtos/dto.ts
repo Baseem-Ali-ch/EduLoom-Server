@@ -212,6 +212,8 @@ export class LiveClassDTO {
   }
 }
 
+
+
 export class CourseDTO {
   title: string;
   description: string;
@@ -275,5 +277,19 @@ export class CouponDTO {
     this.minPurAmt = data.minPurAmt || 0;
     this.maxPurAmt = data.maxPurAmt || 0;
     this.status = data.status || false;
+  }
+}
+
+export class AssignmentSubmissionDTO{
+  courseId : string
+  assignmentId: string
+  link: string
+  studentId: string
+
+  constructor(data: Partial<AssignmentSubmissionDTO>){
+    this.courseId = data.courseId || ''
+    this.assignmentId = data.assignmentId || ''
+    this.link = data.link || ''
+    this.studentId = data.studentId || ''
   }
 }

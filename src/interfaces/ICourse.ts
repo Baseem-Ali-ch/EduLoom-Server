@@ -9,11 +9,25 @@ export interface ICoupon {
   status: boolean;
 }
 
-
 export interface IOffer {
-    _id?: string
-    title: string;
-    description: string;
-    discount: number;
-    isActive: boolean;
-  }
+  _id?: string;
+  title: string;
+  description: string;
+  discount: number;
+  isActive: boolean;
+}
+
+export interface IAssignment {
+  courseId: string;
+  assignmentId: string;
+  studentId: string;
+  link: string;
+}
+export interface IQuizSubmission {
+  courseId: string;
+  quizId: string;
+  studentId: string;
+  answers: { [questionId: string]: string };
+  results: { correct: number; wrong: number; skipped: number };
+  submittedAt: Date;
+}

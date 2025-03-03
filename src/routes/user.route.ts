@@ -12,6 +12,9 @@ import { NotificationController } from '../controllers/student/notification.cont
 import { NotificationRepo } from '../repo/student/notification.repo';
 import { NotificationService } from '../services/student/notification.services';
 import upload from '../configs/multer';
+import { instructorCourseController } from '../controllers/instructor/course.controller';
+import { instructorCourseService } from '../services/instructor/course.services';
+import { CourseRepo } from '../repo/instructor/course.repo';
 
 export const userRouter = express.Router();
 
@@ -19,6 +22,7 @@ export const userRouter = express.Router();
 const userRepo = new UserRepo();
 const instructorRepo = new InstructorRepo();
 const notificationRepo = new NotificationRepo();
+const courseRepo = new CourseRepo();
 
 // Service dependencies
 const otpService = new OTPService();
@@ -26,6 +30,7 @@ const emailService = new EmailService();
 const authService = new AuthService(userRepo, otpService, emailService);
 const profileService = new ProfileService(userRepo, instructorRepo);
 const notificationService = new NotificationService(notificationRepo, emailService);
+const courseService = new instructorCourseService(courseRepo);
 
 // register controller
 const authController = new AuthController(authService);
@@ -35,6 +40,9 @@ const profileController = new ProfileController(profileService);
 
 // notification controller
 const notificationController = new NotificationController(notificationService);
+
+// course controller 
+const courseController = new instructorCourseController(courseService);
 
 // authenticaiton routes
 userRouter.post('/register', (req, res) => authController.register(req, res));
@@ -58,3 +66,11 @@ userRouter.post('/instructor-request', verifyToken, (req, res) => profileControl
 userRouter.get('/notification', (req, res) => notificationController.getNotification(req, res));
 userRouter.put('/notification/:id', (req, res) => notificationController.updateStatus(req, res));
 userRouter.post('/send-email', (req, res) => notificationController.sendNotificationMail(req, res));
+
+userRouter.post('/submit-assignment', verifyToken, (req, res) => courseController.submitAssignment(req, res));
+userRouter.get('/submissions/:courseId', verifyToken, (req, res) => courseController.getStudentSubmissions(req, res));
+userRouter.post('/submit-quiz', verifyToken, (req, res) => courseController.submitQuiz(req, res));
+userRouter.post('/enroll', verifyToken, (req, res) => courseController.createOrder(req, res));
+userRouter.post('/verify-payment', verifyToken, (req, res) => courseController.verifyPayment(req, res));
+userRouter.get('/enrollment/:courseId', verifyToken, (req, res) => courseController.checkEnrollment(req, res));
+userRouter.get('/coupons', verifyToken, (req, res) => courseController.getCoupons(req, res));

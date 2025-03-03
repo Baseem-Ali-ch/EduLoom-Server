@@ -21,7 +21,7 @@ export interface IInstructor {
 export interface Lesson {
   title: string;
   content: string;
-  document?: string; 
+  document?: string;
 }
 
 export interface Module {
@@ -51,10 +51,14 @@ export interface Quiz {
 
 export interface LiveClass {
   title: string;
-  scheduleDate: string; 
-  duration: string; 
+  scheduleDate: string;
+  duration: string;
   meetingLink: string;
   description: string;
+}
+
+export interface EnrollesStudents{
+  studentId: string
 }
 
 export interface ICourse {
@@ -62,14 +66,15 @@ export interface ICourse {
   description: string;
   category: string;
   difficultyLevel: string;
-  price: string; 
+  price: string;
   modules: Module[];
   assignments: Assignment[];
   quizzes: Quiz[];
   liveClasses: LiveClass[];
-  instructorId: ObjectId | null
-  offer : ObjectId | null
-  coupon: ObjectId | null
+  instructorId: ObjectId | null;
+  offer: ObjectId | null;
+  coupon: ObjectId | null;
+  enrolledStudents?: EnrollesStudents[]
 }
 
 export interface IInstructorAuthService {

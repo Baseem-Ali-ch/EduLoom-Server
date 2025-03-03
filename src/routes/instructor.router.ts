@@ -53,3 +53,4 @@ instructorRouter.post('/change-password', verifyToken, (req, res) => profileCont
 instructorRouter.post('/create-course', verifyToken, upload.array('documents', 10), (req, res) => courseController.createCourse(req, res));
 instructorRouter.get('/get-courses', verifyToken, (req, res) => courseController.getCourse(req, res));
 instructorRouter.get('/get-doc', verifyToken, (req, res) => courseController.getDoc(req, res));
+instructorRouter.put('/update-course/:courseId', verifyToken, upload.array('documents', 10), (req, res) => courseController.updateCourse(req, res));
