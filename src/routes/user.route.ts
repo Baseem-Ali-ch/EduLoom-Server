@@ -52,6 +52,7 @@ userRouter.post('/login', (req, res) => authController.login(req, res));
 userRouter.post('/forget-password', (req, res) => authController.forgetPassword(req, res));
 userRouter.post('/reset-password', (req, res) => authController.resetPassword(req, res));
 userRouter.post('/google-auth', (req, res) => authController.googleAuth(req, res));
+userRouter.post('/logout', (req, res) => authController.logout(req,res))
 
 // profile routes
 userRouter.get('/getUser', verifyToken, (req, res) => profileController.userDetails(req, res));
@@ -67,6 +68,7 @@ userRouter.get('/notification', (req, res) => notificationController.getNotifica
 userRouter.put('/notification/:id', (req, res) => notificationController.updateStatus(req, res));
 userRouter.post('/send-email', (req, res) => notificationController.sendNotificationMail(req, res));
 
+// course handling routes
 userRouter.post('/submit-assignment', verifyToken, (req, res) => courseController.submitAssignment(req, res));
 userRouter.get('/submissions/:courseId', verifyToken, (req, res) => courseController.getStudentSubmissions(req, res));
 userRouter.post('/submit-quiz', verifyToken, (req, res) => courseController.submitQuiz(req, res));

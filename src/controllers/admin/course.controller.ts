@@ -3,6 +3,7 @@ import { Response, Request } from 'express';
 import { CouponDTO, OfferDTO } from '../../dtos/dto';
 import { MapCoupon, MapOffer } from '../../mappers/mapper';
 import logger from '../../configs/logger';
+import { ICoupon, IOffer } from 'src/interfaces/ICourse';
 // import logger from '../../configs/logger';
 // import { CourseDTO } from '../../dtos/dto';
 // import { MapCourse } from '../../mappers/mapper';
@@ -28,7 +29,6 @@ export class AdminCourseController {
 
   async addOffer(req: Request, res: Response) {
     try {
-
       const dto = new OfferDTO(req.body.offerData);
       const offerData = MapOffer(dto);
       const result = await this._adminCourseService.addOffer(offerData);
@@ -52,6 +52,21 @@ export class AdminCourseController {
     }
   }
 
+  async updateOffer(req: Request, res: Response) {
+    try {
+      const offerId = req.params.id;
+      const updatedOfferData: IOffer = req.body;
+      console.log('updatedOfferData', updatedOfferData);
+
+      const updatedOffer = await this._adminCourseService.updateOffer(offerId, updatedOfferData);
+      console.log('updatedOffer', updatedOffer);
+      res.status(200).json({ message: 'Offer updated successfully', result: updatedOffer });
+    } catch (error) {
+      console.error('Error updating offer:', error);
+      res.status(500).json({ message: 'Internal server error' });
+    }
+  }
+
   async getCoupon(req: Request, res: Response) {
     try {
       console.log('body', req.body);
@@ -67,7 +82,7 @@ export class AdminCourseController {
   async addCoupon(req: Request, res: Response) {
     try {
       console.log('req', req.body.couponData);
-      
+
       const dto = new CouponDTO(req.body.couponData);
       const couponData = MapCoupon(dto);
       const result = await this._adminCourseService.addCoupon(couponData);
@@ -88,6 +103,19 @@ export class AdminCourseController {
       console.log('Error updating coupon status', error);
       logger.error('Controller : Error updating coupon status', error);
       res.status(500).json({ message: 'Error updating coupon status', error });
+    }
+  }
+
+  async updateCoupon(req: Request, res: Response) {
+    try {
+      const couponId = req.params.id;
+      const updatedCouponData: ICoupon = req.body;
+
+      const updatedCoupon = await this._adminCourseService.updateCoupon(couponId, updatedCouponData);
+      res.status(200).json({ message: 'Offer updated successfully', result: updatedCoupon });
+    } catch (error) {
+      console.error('Error updating Coupon:', error);
+      res.status(500).json({ message: 'Internal server Coupon' });
     }
   }
 }

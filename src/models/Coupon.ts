@@ -25,7 +25,7 @@ const couponSchema = new mongoose.Schema({
     type: Number,
   },
   usedUsers: [{ type: String }],
-  status: {
+  isActive: {
     type: Boolean,
     default: 'active',
   },

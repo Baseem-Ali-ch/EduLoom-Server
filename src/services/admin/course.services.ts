@@ -1,5 +1,6 @@
 import { CouponDTO, OfferDTO } from 'src/dtos/dto';
 import { CourseRepo } from '../../repo/admin/course.repo';
+import { ICoupon, IOffer } from 'src/interfaces/ICourse';
 
 export class adminCourseService {
   private _courseRepository: CourseRepo;
@@ -24,6 +25,11 @@ export class adminCourseService {
     return changed;
   }
 
+  async updateOffer(offerId : string, updatedOfferData: IOffer){
+    const changed = await this._courseRepository.updateOffer(offerId, updatedOfferData)
+    return changed
+  }
+
   async getCoupons() {
     const coupons = await this._courseRepository.findAllCoupon();
     return coupons;
@@ -35,7 +41,12 @@ export class adminCourseService {
   }
 
   async couponChangeStatus(userId: string, status: boolean) {
-    const changed = await this._courseRepository.updateByIdCoupon(userId, { status: status });
+    const changed = await this._courseRepository.updateByIdCoupon(userId, { isActive: status });
     return changed;
+  }
+
+  async updateCoupon(Coupon : string, updatedCouponData: ICoupon){
+    const changed = await this._courseRepository.updateCoupon(Coupon, updatedCouponData)
+    return changed
   }
 }

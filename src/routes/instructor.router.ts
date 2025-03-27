@@ -41,6 +41,7 @@ instructorRouter.post('/register', (req, res) => authController.register(req, re
 instructorRouter.post('/login', (req, res) => authController.login(req, res));
 instructorRouter.post('/forget-password', (req, res) => authController.forgetPassword(req, res));
 instructorRouter.post('/reset-password', (req, res) => authController.resetPassword(req, res));
+instructorRouter.post('/logout', (req, res) => authController.logout(req, res));
 
 // profile routes
 instructorRouter.get('/getInstructor', verifyToken, (req, res) => profileController.instructorDetails(req, res));
@@ -51,6 +52,16 @@ instructorRouter.post('/change-password', verifyToken, (req, res) => profileCont
 
 // course routes
 instructorRouter.post('/create-course', verifyToken, upload.array('documents', 10), (req, res) => courseController.createCourse(req, res));
+instructorRouter.post('/zoom/create-meeting', verifyToken, (req, res) => courseController.createZoom(req, res));
 instructorRouter.get('/get-courses', verifyToken, (req, res) => courseController.getCourse(req, res));
 instructorRouter.get('/get-doc', verifyToken, (req, res) => courseController.getDoc(req, res));
 instructorRouter.put('/update-course/:courseId', verifyToken, upload.array('documents', 10), (req, res) => courseController.updateCourse(req, res));
+instructorRouter.post('/publish-course/:courseId', verifyToken, (req, res) => courseController.publishCourse(req, res));
+
+instructorRouter.get('/get-students', verifyToken, (req, res) => courseController.getStudents(req, res));
+
+// announcement routes
+instructorRouter.post('/announcements', verifyToken, (req, res) => courseController.createAnnouncement(req, res));
+instructorRouter.get('/announcements', verifyToken, (req, res) => courseController.getAnnouncement(req, res));
+
+

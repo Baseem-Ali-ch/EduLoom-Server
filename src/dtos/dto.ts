@@ -142,7 +142,7 @@ export class LessonDTO {
   constructor(data: Partial<LessonDTO>) {
     this.title = data.title || '';
     this.content = data.content || '';
-    this.document = data.document
+    this.document = data.document;
   }
 }
 
@@ -212,14 +212,12 @@ export class LiveClassDTO {
   }
 }
 
-
-
 export class CourseDTO {
   title: string;
   description: string;
   category: string;
   difficultyLevel: string;
-  price: string;
+  price: number;
   modules: ModuleDTO[];
   assignments: AssignmentDTO[];
   quizzes: QuizDTO[];
@@ -227,14 +225,15 @@ export class CourseDTO {
   instructorId: ObjectId | null;
   offer: ObjectId | null;
   coupon: ObjectId | null;
-  isActive: boolean
+  isActive: boolean;
+  status: 'draft' | 'published';
 
   constructor(data: Partial<CourseDTO>) {
     this.title = data.title || '';
     this.description = data.description || '';
     this.category = data.category || '';
     this.difficultyLevel = data.difficultyLevel || '';
-    this.price = data.price || '';
+    this.price = data.price || 0;
     this.modules = data.modules?.map((module) => new ModuleDTO(module)) || [];
     this.assignments = data.assignments?.map((assignment) => new AssignmentDTO(assignment)) || [];
     this.quizzes = data.quizzes?.map((quiz) => new QuizDTO(quiz)) || [];
@@ -242,19 +241,20 @@ export class CourseDTO {
     this.instructorId = data.instructorId || null;
     this.offer = data.offer || null;
     this.coupon = data.coupon || null;
-    this.isActive = data.isActive || true
+    this.isActive = data.isActive || true;
+    this.status = data.status || 'draft';
   }
 }
 
 export class OfferDTO {
   title: string;
-  description: string;
+  category: string;
   discount: number;
   status: boolean;
 
   constructor(data: Partial<OfferDTO>) {
     this.title = data.title || '';
-    this.description = data.description || '';
+    this.category = data.category || '';
     this.discount = data.discount || 0;
     this.status = data.status || false;
   }
@@ -267,7 +267,7 @@ export class CouponDTO {
   expDate: string;
   minPurAmt: number;
   maxPurAmt: number;
-  status: boolean;
+  isActive: boolean;
 
   constructor(data: Partial<CouponDTO>) {
     this.couponCode = data.couponCode || '';
@@ -276,20 +276,32 @@ export class CouponDTO {
     this.expDate = data.expDate || '';
     this.minPurAmt = data.minPurAmt || 0;
     this.maxPurAmt = data.maxPurAmt || 0;
-    this.status = data.status || false;
+    this.isActive = data.isActive || false;
   }
 }
 
-export class AssignmentSubmissionDTO{
-  courseId : string
-  assignmentId: string
-  link: string
-  studentId: string
+export class AssignmentSubmissionDTO {
+  courseId: string;
+  assignmentId: string;
+  link: string;
+  studentId: string;
 
-  constructor(data: Partial<AssignmentSubmissionDTO>){
-    this.courseId = data.courseId || ''
-    this.assignmentId = data.assignmentId || ''
-    this.link = data.link || ''
-    this.studentId = data.studentId || ''
+  constructor(data: Partial<AssignmentSubmissionDTO>) {
+    this.courseId = data.courseId || '';
+    this.assignmentId = data.assignmentId || '';
+    this.link = data.link || '';
+    this.studentId = data.studentId || '';
+  }
+}
+
+export class AnnouncementDTO {
+  instructorId: string;
+  title: string;
+  description: string;
+
+  constructor(data: Partial<AnnouncementDTO>){
+    this.instructorId = data.instructorId || ''
+    this.title = data.title || ''
+    this.description = data.description || ''
   }
 }

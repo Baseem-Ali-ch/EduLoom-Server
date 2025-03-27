@@ -1,7 +1,7 @@
 import { Offer } from '../../models/Offer';
 import { Coupon } from '../../models/Coupon';
 import { BaseRepository } from '../base.repo';
-import { ICoupon } from 'src/interfaces/ICourse';
+import { ICoupon, IOffer } from 'src/interfaces/ICourse';
 
 export class CourseRepo extends BaseRepository<any> {
   constructor() {
@@ -30,5 +30,25 @@ export class CourseRepo extends BaseRepository<any> {
   async updateByIdCoupon(id: string, updateData: Partial<ICoupon>) {
     const coupon = await Coupon.findByIdAndUpdate(id, updateData, { new: true, runValidators: true }).exec();
     return coupon;
+  }
+
+  async updateOffer(offerId: string, updatedOfferData: IOffer) {
+    try {
+      const offer = await Offer.findByIdAndUpdate(offerId, updatedOfferData, { new: true });
+      return offer;
+    } catch (error) {
+      console.error('Error update offer', error);
+      throw new Error('Error update offer');
+    }
+  }
+
+  async updateCoupon(couponId: string, updatedCouponData: ICoupon) {
+    try {
+      const coupon = await Coupon.findByIdAndUpdate(couponId, updatedCouponData, { new: true });
+      return coupon;
+    } catch (error) {
+      console.error('Error update coupon', error);
+      throw new Error('Error update coupon');
+    }
   }
 }

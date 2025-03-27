@@ -51,6 +51,8 @@ export interface IUserRepo {
   updateUser(user: IUser): Promise<IUser | null>;
   findById(userId: ObjectId): Promise<IUser | null>;
   findStatus(user: IUser): Promise<IUser | null>;
+  create(entity: IUser): Promise<IUser | null>;
+
 }
 
 export interface IAuthService {

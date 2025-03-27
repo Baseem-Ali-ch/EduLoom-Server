@@ -58,6 +58,7 @@ export interface LiveClass {
 }
 
 export interface EnrollesStudents{
+  _id?: string
   studentId: string
 }
 
@@ -66,15 +67,22 @@ export interface ICourse {
   description: string;
   category: string;
   difficultyLevel: string;
-  price: string;
+  price: number;
   modules: Module[];
   assignments: Assignment[];
   quizzes: Quiz[];
   liveClasses: LiveClass[];
   instructorId: ObjectId | null;
+  status: 'draft' | 'published';
   offer: ObjectId | null;
   coupon: ObjectId | null;
   enrolledStudents?: EnrollesStudents[]
+}
+
+export interface IAnnountment{
+  instructorId: string
+  title: string
+  description: string
 }
 
 export interface IInstructorAuthService {

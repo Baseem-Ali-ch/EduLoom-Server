@@ -1,8 +1,8 @@
-import { instructorCourseService } from 'src/services/instructor/course.services';
+import { instructorCourseService } from '../../services/instructor/course.services';
 import { Request, Response } from 'express';
 import logger from '../../configs/logger';
-import { AssignmentSubmissionDTO, CourseDTO } from '../../dtos/dto';
-import { MapAssignmentSubmission, MapCourse } from '../../mappers/mapper';
+import { AnnouncementDTO, AssignmentSubmissionDTO, CourseDTO } from '../../dtos/dto';
+import { MapAnnouncement, MapAssignmentSubmission, MapCourse } from '../../mappers/mapper';
 
 export class instructorCourseController {
   private _instructorCourseService: instructorCourseService;
@@ -11,6 +11,7 @@ export class instructorCourseController {
     this._instructorCourseService = instructorCourseService;
   }
 
+  // get course details
   async getCourse(req: Request, res: Response) {
     try {
       console.log('body', req.body);
@@ -23,13 +24,13 @@ export class instructorCourseController {
     }
   }
 
+  // get course lessons documents
   async getDoc(req: Request, res: Response): Promise<any> {
     try {
-      const courseId = req.query.courseId as string; // Get courseId from query params
+      const courseId = req.query.courseId as string;
       if (!courseId) {
         return res.status(400).json({ message: 'Course ID is required' });
       }
-
       console.log('Fetching signed URLs for course:', courseId);
       const result = await this._instructorCourseService.getDoc(courseId);
       console.log('result', result);
@@ -40,7 +41,7 @@ export class instructorCourseController {
       res.status(500).json({ message: 'Error fetching signed URLs', error: error.message });
     }
   }
-  
+
   async createCourse(req: any, res: Response): Promise<void> {
     try {
       const files = req.files as Express.Multer.File[];
@@ -87,6 +88,31 @@ export class instructorCourseController {
     }
   }
 
+  async publishCourse(req: any, res: Response): Promise<void> {
+    try {
+      const courseId = req.params.courseId;
+      const result = await this._instructorCourseService.publishCourse(courseId);
+      res.status(200).json({ message: 'Course published successfully', result });
+    } catch (error) {
+      console.log('Failed to publish course:', error);
+      logger.error('Error during course publishing:', error);
+      res.status(500).json({ message: 'Error during course publishing', error: error.message });
+    }
+  }
+
+  async createZoom(req: any, res: Response): Promise<void> {
+    try {
+      const meetingDetails = req.body;
+      const meeting = await this._instructorCourseService.createZoomMeeting(meetingDetails);
+      console.log('zoom meeting', meeting);
+      res.json({ success: true, meeting });
+    } catch (error) {
+      console.log('failed to create', error);
+      res.status(500).json({ success: false, message: 'Failed to create Zoom meeting', error: error.message });
+    }
+  }
+
+  // submit assignments
   async submitAssignment(req: any, res: Response): Promise<void> {
     try {
       const dto = new AssignmentSubmissionDTO(req.body);
@@ -109,6 +135,7 @@ export class instructorCourseController {
     }
   }
 
+  // submit quizzes
   async submitQuiz(req: any, res: Response): Promise<void> {
     try {
       const { courseId, quizId, answers } = req.body;
@@ -127,11 +154,13 @@ export class instructorCourseController {
     }
   }
 
+  // payment handling
   async createOrder(req: any, res: Response): Promise<void> {
     try {
       const { courseId, amount } = req.body;
       const studentId = req.userId;
       const order = await this._instructorCourseService.createOrder(courseId, amount, studentId);
+      console.log('order', order)
       res.status(200).json(order);
     } catch (error) {
       console.error('Error creating order:', error);
@@ -140,6 +169,7 @@ export class instructorCourseController {
     }
   }
 
+  // get assignment submissions
   async getStudentSubmissions(req: any, res: Response): Promise<void> {
     try {
       const courseId = req.params.courseId;
@@ -153,6 +183,7 @@ export class instructorCourseController {
     }
   }
 
+  // payment verification
   async verifyPayment(req: any, res: Response): Promise<void> {
     try {
       const paymentData = req.body;
@@ -165,9 +196,10 @@ export class instructorCourseController {
     }
   }
 
+  // ensure students enrollment
   async checkEnrollment(req: any, res: Response): Promise<void> {
     try {
-      const {courseId} = req.params;
+      const { courseId } = req.params;
       console.log('id in parma', courseId);
       const studentId = req.userId;
       console.log('coursid ', courseId);
@@ -180,6 +212,7 @@ export class instructorCourseController {
     }
   }
 
+  // get coupons
   async getCoupons(req: Request, res: Response) {
     try {
       console.log(req.body);
@@ -190,6 +223,44 @@ export class instructorCourseController {
       console.error('Error fething coupons and offer', error);
       logger.error('Error fething coupons and offer:', error);
       res.status(500).json({ message: 'Error fetching coupons and offer', error: error.message });
+    }
+  }
+
+  async getStudents(req: Request, res: Response) {
+    try {
+      console.log(req.body);
+      const result = await this._instructorCourseService.getStudents();
+      res.status(200).json({ message: 'students all retrieved', result });
+    } catch (error) {
+      console.error('Error fething students', error);
+      logger.error('Error fething students:', error);
+      res.status(500).json({ message: 'Error fetching students', error: error.message });
+    }
+  }
+
+  async createAnnouncement(req: Request, res: Response) {
+    try {
+      const dto = new AnnouncementDTO(req.body);
+      const announcementData = MapAnnouncement(dto);
+      const result = await this._instructorCourseService.addAnnouncement(announcementData);
+      res.status(200).json({ message: 'announcement created successfully', result });
+    } catch (error) {
+      console.error('Error creating announcement', error);
+      logger.error('Error creating announcement:', error);
+      res.status(500).json({ message: 'Error creating announcement', error: error.message });
+    }
+  }
+
+  async getAnnouncement(req: Request, res: Response){
+    try {
+      console.log('body', req.params)
+      const result = await this._instructorCourseService.getAnnouncement();
+      console.log('result', result)
+      res.status(200).json({ message: 'announcements all retrieved', result });
+    } catch (error) {
+      console.error('Error creating announcement', error);
+      logger.error('Error creating announcement:', error);
+      res.status(500).json({ message: 'Error creating announcement', error: error.message });
     }
   }
 }

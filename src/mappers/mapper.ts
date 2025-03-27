@@ -1,5 +1,6 @@
 import { ObjectId } from 'mongoose';
 import {
+  AnnouncementDTO,
   AssignmentSubmissionDTO,
   ChangePasswordDTO,
   CouponDTO,
@@ -152,14 +153,15 @@ export function MapCourse(dto: CourseDTO, instructorId: ObjectId) {
     instructorId: instructorId,
     offer: dto.offer,
     coupon: dto.coupon,
-    isActive: dto.isActive
+    isActive: dto.isActive,
+    status: dto.status
   };
 }
 
 export function MapOffer(dto: OfferDTO) {
   return {
     title: dto.title,
-    description: dto.description,
+    category: dto.category,
     discount: dto.discount,
     status: dto.status,
   };
@@ -173,7 +175,7 @@ export function MapCoupon(dto: CouponDTO) {
     expDate: dto.expDate,
     minPurAmt: dto.minPurAmt,
     maxPurAmt: dto.maxPurAmt,
-    status: dto.status,
+    isActive: dto.isActive,
   };
 }
 
@@ -183,5 +185,13 @@ export function MapAssignmentSubmission(dto: AssignmentSubmissionDTO){
     assignmentId: dto.assignmentId,
     studentId: dto.studentId,
     link: dto.link
+  }
+}
+
+export function MapAnnouncement(dto: AnnouncementDTO){
+  return {
+    instructorId: dto.instructorId,
+    title: dto.title,
+    description: dto.description
   }
 }

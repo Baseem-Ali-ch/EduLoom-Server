@@ -6,7 +6,7 @@ export interface ICoupon {
   expDate: string;
   minPurAmt: number;
   maxPurAmt: number;
-  status: boolean;
+  isActive: boolean;
 }
 
 export interface IOffer {

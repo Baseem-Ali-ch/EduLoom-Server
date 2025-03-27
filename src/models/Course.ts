@@ -41,8 +41,10 @@ const LiveClassSchema = new mongoose.Schema({
 });
 
 const EnrolledStudentsSchema = new mongoose.Schema({
-  studentId: { type: String },
-});
+  studentId: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User' 
+  }],});
 
 const CourseSchema = new mongoose.Schema(
   {
@@ -85,6 +87,11 @@ const CourseSchema = new mongoose.Schema(
     isActive: {
       type: Boolean,
       defauld: true,
+    },
+    status: { 
+      type: String, 
+      enum: ['draft', 'published'], 
+      default: 'draft' 
     },
     enrolledStudents: [EnrolledStudentsSchema],
   },

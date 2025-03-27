@@ -1,10 +1,13 @@
 import { Course } from '../../models/Course';
-import { ICourse } from '../../interfaces/IInstructor';
+import { IAnnountment, ICourse } from '../../interfaces/IInstructor';
 import { BaseRepository } from '../base.repo';
 import { Assignment } from '../../models/Assignment';
 import { IAssignment, IQuizSubmission } from '../../interfaces/ICourse';
 import { Quiz } from '../../models/Quiz';
 import { Coupon } from '../../models/Coupon';
+import { User } from '../../models/User';
+import { ObjectId } from 'mongoose';
+import { Announcement } from '../../models/Announcement';
 
 export class CourseRepo extends BaseRepository<ICourse> {
   constructor() {
@@ -28,6 +31,10 @@ export class CourseRepo extends BaseRepository<ICourse> {
       console.error('Error updating course:', error);
       throw new Error('Failed to update course');
     }
+  }
+
+  async findByInstructorAndStatus(instructorId: ObjectId, status: string): Promise<any> {
+    return await Course.find({ instructorId, status }).exec();
   }
 
   async createAssignment(submissionData: IAssignment): Promise<IAssignment> {
@@ -97,6 +104,34 @@ export class CourseRepo extends BaseRepository<ICourse> {
     } catch (error) {
       console.error('Error find coupon and offer', error);
       throw new Error('Faile to find coupon and offer');
+    }
+  }
+
+  async find() {
+    try {
+      return await User.find();
+    } catch (error) {
+      console.log('Error find users', error);
+      throw new Error('Error find users');
+    }
+  }
+
+  async findAnnouncements() {
+    try {
+      return await Announcement.find();
+    } catch (error) {
+      console.log('Error find users', error);
+      throw new Error('Error find users');
+    }
+  }
+
+  async createAnnouncement(announcementData: IAnnountment) {
+    try {
+      const submission = new Announcement(announcementData);
+      return await submission.save();
+    } catch (error) {
+      console.log('Error create announcement', error);
+      throw new Error('Error create announcement');
     }
   }
 }

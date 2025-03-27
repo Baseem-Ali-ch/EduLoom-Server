@@ -2,6 +2,9 @@ import bcrypt from 'bcrypt';
 import { Instructor } from '../../models/Instructor';
 import { IInstructor } from '../../interfaces/IInstructor';
 import { BaseRepository } from '../base.repo';
+import { Revenue } from '../../models/Revenue';
+import { Course } from '../../models/Course';
+import mongoose from 'mongoose';
 
 export class InstructorRepo extends BaseRepository<IInstructor> {
   constructor() {
@@ -56,6 +59,49 @@ export class InstructorRepo extends BaseRepository<IInstructor> {
     } catch (error) {
       console.error('Error find status', error);
       return null;
+    }
+  }
+
+  async findRevenues() {
+    try {
+      return await Revenue.find().exec();
+    } catch (error) {
+      console.log('error find revenues', error);
+      return null;
+    }
+  }
+
+  async findCourse(enrollmentId: string) {
+    try {
+      return await Course.findOne({ 'enrolledStudents._id': enrollmentId }).select('title price').populate({
+        path: 'enrolledStudents.studentId',
+        select: 'userName',
+      });
+    } catch (error) {
+      console.log('error find course', error);
+      return null;
+    }
+  }
+
+  async updateMany(instructorId: string) {
+    try {
+      const result = await Revenue.updateMany({ instructor: new mongoose.Types.ObjectId(instructorId), insWithdrawn: false }, { $set: { insWithdrawn: true } });
+      console.log('ins',result);
+
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async updateManyAdm(instructorId: string) {
+    try {
+      const result = await Revenue.updateMany({ instructor: new mongoose.Types.ObjectId(instructorId), admWithdrawn: false }, { $set: { admWithdrawn: true } });
+      console.log('admin',result);
+      return result;
+    } catch (error) {
+      console.log('error update revenue', error);
+      throw error;
     }
   }
 }

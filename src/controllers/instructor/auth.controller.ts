@@ -3,6 +3,8 @@ import { InstructorAuthService } from '../../services/instructor/auth.services';
 import logger from '../../configs/logger';
 import { ForgetPasswordDTO, LoginDTO, RegisterDTO, ResetPasswordDTO } from '../../dtos/dto';
 import { MapForgetPassword, MapLogin, MapRegister, MapResetPassword } from '../../mappers/mapper';
+import redisClient from '../../configs/redis';
+import jwt from 'jsonwebtoken';
 
 export class InstructorAuthController {
   private _instructorAuthService: InstructorAuthService;
@@ -68,6 +70,28 @@ export class InstructorAuthController {
       console.log('failed reset password', error);
       logger.error('Controller : Error reset password', error);
       res.status(500).json({ message: 'failed to reset password handling' });
+    }
+  }
+
+  async logout(req: any, res: Response) {
+    console.log('logout here');
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+
+    if (!token) {
+      res.status(400).json({ message: 'No token provided' });
+    }
+
+    try {
+      const decoded = jwt.decode(token) as { exp?: number };
+      const expiresIn = decoded.exp ? decoded.exp - Math.floor(Date.now() / 1000) : 3600;
+
+      await redisClient.setEx(token, expiresIn, 'blacklisted');
+      res.status(200).json({ message: 'Logged out successfully' });
+    } catch (error) {
+      console.log('Logout failed', error);
+      logger.error('Controller : Error during logout', error);
+      res.status(500).json({ message: 'Server error' });
     }
   }
 }

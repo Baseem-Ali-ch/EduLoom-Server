@@ -1,0 +1,4 @@
+2025-03-25T05:29:00.915Z [error]: Controller : Error retrieving user details User or profile photo not found - Error: User or profile photo not found
+    at InstructorProfileService.userImage (C:\Users\HP\Desktop\Week Task\Week 22-25\EduLoom-Server\src\services\instructor\profile.services.ts:31:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async InstructorProfileController.userImage (C:\Users\HP\Desktop\Week Task\Week 22-25\EduLoom-Server\src\controllers\instructor\profile.controller.ts:29:25)

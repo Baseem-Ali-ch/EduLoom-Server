@@ -65,11 +65,10 @@ adminRouter.patch('/changeStatusIns/status', (req, res) => instructorMangementCo
 adminRouter.get('/get-offers', (req, res) => courseMangementController.getOffer(req, res));
 adminRouter.post('/add-offer', (req, res) => courseMangementController.addOffer(req, res));
 adminRouter.patch('/change-offer/status', (req, res) => courseMangementController.changeStatus(req, res));
+adminRouter.put('/update-offer/:id', (req, res) => courseMangementController.updateOffer(req, res));
 
-
-// offer management routes
+// coupons management routes
 adminRouter.get('/get-coupons', (req, res) => courseMangementController.getCoupon(req, res));
 adminRouter.post('/add-coupon', (req, res) => courseMangementController.addCoupon(req, res));
 adminRouter.patch('/change-coupon/status', (req, res) => courseMangementController.couponChangeStatus(req, res));
-
-
+adminRouter.put('/update-coupon/:id', (req, res) => courseMangementController.updateCoupon(req, res));

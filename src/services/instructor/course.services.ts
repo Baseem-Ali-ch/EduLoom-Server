@@ -1,5 +1,5 @@
 import { CourseRepo } from '../../repo/instructor/course.repo';
-import { CourseDTO } from '../../dtos/dto';
+import { AnnouncementDTO, CourseDTO } from '../../dtos/dto';
 import { ObjectId } from 'mongoose';
 import { GetObjectCommand, PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
@@ -8,12 +8,36 @@ import { EnrollesStudents, ICourse } from '../../interfaces/IInstructor';
 import { MapCourse } from '../../mappers/mapper';
 import { IAssignment, IQuizSubmission } from 'src/interfaces/ICourse';
 import Razorpay from 'razorpay';
-import crypto from 'crypto'
+import crypto from 'crypto';
+import axios, { AxiosResponse } from 'axios';
+import { Revenue } from '../../models/Revenue';
+// import jwt from 'jsonwebtoken';
+
+interface ZoomMeetingDetails {
+  title: string;
+  scheduleDate: string;
+  duration: number;
+}
+
+interface ZoomMeetingResponse {
+  id: number;
+  topic: string;
+  start_time: string;
+  duration: number;
+  join_url: string;
+}
 
 export class instructorCourseService {
   private _courseRepository: CourseRepo;
   private _s3Client: S3Client;
   private _razorpay: Razorpay;
+  private readonly zoomClientId: string;
+  private readonly zoomClientSecret: string;
+  private readonly zoomBaseUrl: string;
+  private readonly zoomAccountId: string;
+  private zoomAccessToken: string | null = null;
+  private zoomTokenExpiresAt: number | null = null;
+  // private readonly zoomRedirectUri: string;
 
   constructor(courseRepo: CourseRepo) {
     this._courseRepository = courseRepo;
@@ -28,6 +52,11 @@ export class instructorCourseService {
       key_id: process.env.RAZORPAY_KEY_ID,
       key_secret: process.env.RAZORPAY_KEY_SECRET,
     });
+    this.zoomClientId = process.env.ZOOM_CLIENT_ID!;
+    this.zoomClientSecret = process.env.ZOOM_SECRET_ID!;
+    this.zoomBaseUrl = 'https://api.zoom.us/v2';
+    this.zoomAccountId = process.env.ZOOM_ACCOUNT_ID!;
+    // this.zoomRedirectUri = process.env.ZOOM_REDIRECT_URI!;
   }
 
   async getCourse() {
@@ -45,7 +74,6 @@ export class instructorCourseService {
 
     const signedUrls: { [key: string]: string } = {};
 
-    // Iterate through modules and lessons to generate signed URLs
     for (const module of course.modules) {
       for (const lesson of module.lessons) {
         if (lesson.document) {
@@ -55,9 +83,9 @@ export class instructorCourseService {
               Bucket: process.env.AWS_S3_BUCKET_NAME!,
               Key: lesson.document,
             }),
-            { expiresIn: 3600 } // 1 hour expiration
+            { expiresIn: 3600 }
           );
-          signedUrls[lesson.document] = signedUrl; // Map documentKey to signedUrl
+          signedUrls[lesson.document] = signedUrl;
         }
       }
     }
@@ -164,6 +192,14 @@ export class instructorCourseService {
     return updatedCourse;
   }
 
+  async publishCourse(courseId: string): Promise<any> {
+    const updatedCourse = await this._courseRepository.updateCourse(courseId, { status: 'published' });
+    if (!updatedCourse) {
+      throw new Error('Course not found or publish failed');
+    }
+    return updatedCourse;
+  }
+
   async submitAssignment(courseId: string, assignmentId: string, studentId: string, link: string): Promise<IAssignment> {
     const course = await this._courseRepository.findById(courseId);
     if (!course || !course.assignments.some((a: any) => a._id.toString() === assignmentId)) {
@@ -224,43 +260,139 @@ export class instructorCourseService {
   async verifyPayment(paymentData: any, studentId: string): Promise<any> {
     const { razorpay_order_id, razorpay_payment_id, razorpay_signature, courseId } = paymentData;
     const key_secret = process.env.RAZORPAY_KEY_SECRET as string;
-    const generated_signature = crypto
-      .createHmac('sha256', key_secret)
-      .update(`${razorpay_order_id}|${razorpay_payment_id}`)
-      .digest('hex');
+    const generated_signature = crypto.createHmac('sha256', key_secret).update(`${razorpay_order_id}|${razorpay_payment_id}`).digest('hex');
 
     if (generated_signature === razorpay_signature) {
       const course = await this._courseRepository.findById(courseId);
       if (!course) throw new Error('Course not found');
 
-      if(!course.enrolledStudents){
-        course.enrolledStudents = []
+      if (!course.enrolledStudents) {
+        course.enrolledStudents = [];
       }
-      if (!course.enrolledStudents.some(student => student.studentId === studentId)) {
+      if (!course.enrolledStudents.some((student) => student.studentId === studentId)) {
         const newStudent: EnrollesStudents = { studentId };
         course.enrolledStudents.push(newStudent);
-        
+
         await this._courseRepository.updateCourse(courseId, { enrolledStudents: course.enrolledStudents });
       }
-      return { status: 'success' };
+
+      const instructorRevenueShare = course.price * 0.8;
+      const adminRevenueShare = course.price * 0.2;
+      const enrollmentId = (course.enrolledStudents ?? []).map(student => student._id);
+      console.log('studendid', enrollmentId)
+      await Revenue.create([
+        {
+          enrollment: enrollmentId,
+          instructor: course.instructorId,
+          admin: process.env.DEFAULT_ADMIN_ID,
+          instructorShare: instructorRevenueShare,
+          adminShare: adminRevenueShare,
+          date: new Date(),
+        },
+      ]);
+
+      console.log('instructorRevenueShare',instructorRevenueShare, adminRevenueShare, enrollmentId)
+
+      return {
+        status: 'success',
+        instructorRevenueShare,
+        adminRevenueShare,
+        enrollmentId: enrollmentId
+      };
     }
     return { status: 'failed' };
   }
 
-  async checkEnrollment(courseId: string, studentId: string): Promise<any> {
+  async checkEnrollment(courseId: string, studentId: string): Promise<{ isEnrolled: boolean }> {
     const course = await this._courseRepository.findById(courseId);
     if (!course) throw new Error('Course not found');
-
-    if(course.enrolledStudents?.some(student => student.studentId === studentId)){
-      return {isEnrolled: true}
-    }
-  }
+    
+    const isEnrolled = course.enrolledStudents?.some((student) => student.studentId == studentId) ?? false;
+    return { isEnrolled };
+}
 
   async getStudentSubmissions(studentId: string, courseId: string): Promise<IAssignment[]> {
     return await this._courseRepository.findByStudentAndCourse(studentId, courseId);
   }
 
-  async getCoupons(){
-    return await this._courseRepository.findCoupon()
+  async getCoupons() {
+    return await this._courseRepository.findCoupon();
+  }
+
+  async getStudents() {
+    return await this._courseRepository.find();
+  }
+
+  private async getZoomAccessToken(): Promise<string> {
+    if (this.zoomAccessToken && this.zoomTokenExpiresAt && Date.now() < this.zoomTokenExpiresAt) {
+      return this.zoomAccessToken;
+    }
+
+    const tokenUrl = 'https://zoom.us/oauth/token';
+    const authHeader = Buffer.from(`${this.zoomClientId}:${this.zoomClientSecret}`).toString('base64');
+
+    try {
+      const response = await axios.post(tokenUrl, `grant_type=account_credentials&account_id=${this.zoomAccountId}`, {
+        headers: {
+          Authorization: `Basic ${authHeader}`,
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      });
+
+      this.zoomAccessToken = response.data.access_token;
+      this.zoomTokenExpiresAt = Date.now() + (response.data.expires_in - 300) * 1000;
+      console.log('New Zoom Access Token:', this.zoomAccessToken);
+      return this.zoomAccessToken!;
+    } catch (error: any) {
+      console.error('Error getting Zoom access token:', error.response?.data || error.message);
+      throw new Error(`Failed to get Zoom access token: ${error.response?.data?.message || error.message}`);
+    }
+  }
+
+  async createZoomMeeting(meetingDetails: ZoomMeetingDetails): Promise<ZoomMeetingResponse> {
+    const accessToken = await this.getZoomAccessToken();
+    const { title, scheduleDate, duration } = meetingDetails;
+
+    try {
+      const response: AxiosResponse<ZoomMeetingResponse> = await axios.post(
+        `${this.zoomBaseUrl}/users/me/meetings`,
+        {
+          topic: title,
+          type: 2,
+          start_time: scheduleDate,
+          duration: duration,
+          timezone: 'UTC',
+          settings: {
+            host_video: true,
+            participant_video: true,
+            join_before_host: false,
+            mute_upon_entry: true,
+            watermark: false,
+            use_pmi: false,
+            approval_type: 0,
+            registration_type: 1,
+          },
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      return response.data;
+    } catch (error: any) {
+      console.error('Error creating Zoom meeting:', error.response?.data || error.message);
+      throw new Error(`Failed to create Zoom meeting: ${error.response?.data?.message || error.message}`);
+    }
+  }
+
+  async addAnnouncement(announcementData: AnnouncementDTO) {
+    const coupons = await this._courseRepository.createAnnouncement(announcementData);
+    return coupons;
+  }
+
+  async getAnnouncement() {
+    return await this._courseRepository.findAnnouncements();
   }
 }
