@@ -1,6 +1,6 @@
 import { IUser } from './IUser';
 import { IInstructor } from './IInstructor';
-import { IOffer } from './ICourse';
+// import { IOffer } from './ICourse';
 
 export interface IAdminRepo {
   findByEmail(email: string): Promise<IUser | null>;
