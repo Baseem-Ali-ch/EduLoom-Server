@@ -1,0 +1,42 @@
+2025-03-27T08:03:17.201Z [error]: Controller : Error Invalid Credentials Invalid credentials - Error: Invalid credentials
+    at InstructorAuthService.login (C:\Users\HP\Desktop\Week Task\Week 22-25\EduLoom-Server\src\services\instructor\auth.services.ts:61:13)
+    at async InstructorAuthController.login (C:\Users\HP\Desktop\Week Task\Week 22-25\EduLoom-Server\src\controllers\instructor\auth.controller.ts:37:22)
+2025-03-27T08:08:49.017Z [error]: Controller : Error retrieving user details User or profile photo not found - Error: User or profile photo not found
+    at ProfileService.userImage (C:\Users\HP\Desktop\Week Task\Week 22-25\EduLoom-Server\src\services\student\profile.services.ts:35:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ProfileController.userImage (C:\Users\HP\Desktop\Week Task\Week 22-25\EduLoom-Server\src\controllers\student\profile.controller.ts:29:25)
+2025-03-27T08:12:22.986Z [error]: Controller : Error retrieving user details User or profile photo not found - Error: User or profile photo not found
+    at ProfileService.userImage (C:\Users\HP\Desktop\Week Task\Week 22-25\EduLoom-Server\src\services\student\profile.services.ts:35:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ProfileController.userImage (C:\Users\HP\Desktop\Week Task\Week 22-25\EduLoom-Server\src\controllers\student\profile.controller.ts:29:25)
+2025-03-27T08:12:53.445Z [error]: Controller : Error retrieving user details User or profile photo not found - Error: User or profile photo not found
+    at ProfileService.userImage (C:\Users\HP\Desktop\Week Task\Week 22-25\EduLoom-Server\src\services\student\profile.services.ts:35:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ProfileController.userImage (C:\Users\HP\Desktop\Week Task\Week 22-25\EduLoom-Server\src\controllers\student\profile.controller.ts:29:25)
+2025-03-27T08:15:53.468Z [error]: Controller : Error retrieving user details User or profile photo not found - Error: User or profile photo not found
+    at ProfileService.userImage (C:\Users\HP\Desktop\Week Task\Week 22-25\EduLoom-Server\src\services\student\profile.services.ts:35:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ProfileController.userImage (C:\Users\HP\Desktop\Week Task\Week 22-25\EduLoom-Server\src\controllers\student\profile.controller.ts:29:25)
+2025-03-27T08:19:30.357Z [error]: Controller : Error retrieving user details User or profile photo not found - Error: User or profile photo not found
+    at ProfileService.userImage (C:\Users\HP\Desktop\Week Task\Week 22-25\EduLoom-Server\src\services\student\profile.services.ts:35:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ProfileController.userImage (C:\Users\HP\Desktop\Week Task\Week 22-25\EduLoom-Server\src\controllers\student\profile.controller.ts:29:25)
+2025-03-27T08:25:37.821Z [error]: Controller : Error during logout Cannot read properties of null (reading 'exp') - TypeError: Cannot read properties of null (reading 'exp')
+    at AuthController.logout (C:\Users\HP\Desktop\Week Task\Week 22-25\EduLoom-Server\src\controllers\student\auth.controller.ts:135:33)
+    at C:\Users\HP\Desktop\Week Task\Week 22-25\EduLoom-Server\src\routes\user.route.ts:55:57
+    at Layer.handle [as handle_request] (C:\Users\HP\Desktop\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\HP\Desktop\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\HP\Desktop\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\HP\Desktop\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\HP\Desktop\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\HP\Desktop\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\HP\Desktop\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\HP\Desktop\node_modules\express\lib\router\index.js:175:3)
+2025-03-27T08:48:29.667Z [error]: Controller : Error retrieving user details User or profile photo not found - Error: User or profile photo not found
+    at ProfileService.userImage (C:\Users\HP\Desktop\Week Task\Week 22-25\EduLoom-Server\src\services\student\profile.services.ts:35:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ProfileController.userImage (C:\Users\HP\Desktop\Week Task\Week 22-25\EduLoom-Server\src\controllers\student\profile.controller.ts:29:25)
+2025-03-27T08:50:27.807Z [error]: Controller : Error retrieving user details User or profile photo not found - Error: User or profile photo not found
+    at ProfileService.userImage (C:\Users\HP\Desktop\Week Task\Week 22-25\EduLoom-Server\src\services\student\profile.services.ts:35:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ProfileController.userImage (C:\Users\HP\Desktop\Week Task\Week 22-25\EduLoom-Server\src\controllers\student\profile.controller.ts:29:25)
