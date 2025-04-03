@@ -6,7 +6,7 @@ import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 import { Course } from '../../models/Course';
 import { EnrollesStudents, ICourse } from '../../interfaces/IInstructor';
 import { MapCourse } from '../../mappers/mapper';
-import { IAssignment, IQuizSubmission } from 'src/interfaces/ICourse';
+import { IAssignment, IQuizSubmission } from 'interfaces/ICourse';
 import Razorpay from 'razorpay';
 import crypto from 'crypto';
 import axios, { AxiosResponse } from 'axios';
