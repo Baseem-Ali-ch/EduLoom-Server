@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { IQuizSubmission } from 'src/interfaces/ICourse';
+import { IQuizSubmission } from 'interfaces/ICourse';
 
 const quizSubmissionSchema = new mongoose.Schema<IQuizSubmission>(
   {

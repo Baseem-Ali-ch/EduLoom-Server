@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { IAnnountment } from 'src/interfaces/IInstructor';
+import { IAnnountment } from 'interfaces/IInstructor';
 
 const announcementSchema = new mongoose.Schema<IAnnountment>(
   {

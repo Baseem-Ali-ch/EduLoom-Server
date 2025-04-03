@@ -1,4 +1,4 @@
-import { IUserManageService } from 'src/interfaces/IAdmin';
+import { IUserManageService } from 'interfaces/IAdmin';
 import { AdminRepo } from '../../repo/admin/admin.repo';
 
 export class UserMangeService implements IUserManageService{

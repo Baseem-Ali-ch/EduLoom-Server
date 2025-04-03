@@ -1,6 +1,6 @@
 // src/models/user.model.ts
 import mongoose from 'mongoose';
-import { IUser } from 'src/interfaces/IUser';
+import { IUser } from 'interfaces/IUser';
 
 const userSchema = new mongoose.Schema<IUser>({
   userName: { 

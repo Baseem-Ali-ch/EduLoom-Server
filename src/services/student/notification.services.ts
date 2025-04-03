@@ -1,5 +1,5 @@
 import { ObjectId } from 'mongoose';
-import { NotificationRepo } from 'src/repo/student/notification.repo';
+import { NotificationRepo } from 'repo/student/notification.repo';
 import { EmailService } from './email.services';
 import { INotificationService } from '../../interfaces/IUser';
 

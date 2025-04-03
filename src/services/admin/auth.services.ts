@@ -1,4 +1,4 @@
-import { AdminRepo } from 'src/repo/admin/admin.repo';
+import { AdminRepo } from 'repo/admin/admin.repo';
 import jwt from 'jsonwebtoken';
 
 export class AdminAuthService {

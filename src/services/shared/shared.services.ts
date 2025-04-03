@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import { BaseRepository } from '../../repo/base.repo';
-import { IUser } from 'src/interfaces/IUser';
-import { InstructorRepo } from 'src/repo/instructor/instructor.repo';
+import { IUser } from 'interfaces/IUser';
+import { InstructorRepo } from 'repo/instructor/instructor.repo';
 
 export class SharedService {
   private _baseRepository: BaseRepository<IUser>;

@@ -1,4 +1,4 @@
-import { AdminAuthService } from 'src/services/admin/auth.services';
+import { AdminAuthService } from 'services/admin/auth.services';
 import { Request, Response } from 'express';
 import logger from '../../configs/logger';
 import { LoginDTO } from '../../dtos/dto';

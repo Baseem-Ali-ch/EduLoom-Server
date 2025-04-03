@@ -38,7 +38,7 @@ export class instructorCourseController {
     } catch (error) {
       console.log('Failed to get signed URLs:', error);
       logger.error('Error during getDoc:', error);
-      res.status(500).json({ message: 'Error fetching signed URLs', error: error.message });
+      res.status(500).json({ message: 'Error fetching signed URLs', error });
     }
   }
 
@@ -61,7 +61,7 @@ export class instructorCourseController {
     } catch (error) {
       console.log('Failed to create course:', error);
       logger.error('Error during course creation:', error);
-      res.status(500).json({ message: 'Error during course creation', error: error.message });
+      res.status(500).json({ message: 'Error during course creation', error });
     }
   }
 
@@ -84,7 +84,7 @@ export class instructorCourseController {
     } catch (error) {
       console.log('Failed to update course:', error);
       logger.error('Error to update course:', error);
-      res.status(500).json({ message: 'Error updating course', error: error.message });
+      res.status(500).json({ message: 'Error updating course', error });
     }
   }
 
@@ -96,7 +96,7 @@ export class instructorCourseController {
     } catch (error) {
       console.log('Failed to publish course:', error);
       logger.error('Error during course publishing:', error);
-      res.status(500).json({ message: 'Error during course publishing', error: error.message });
+      res.status(500).json({ message: 'Error during course publishing', error });
     }
   }
 
@@ -108,7 +108,7 @@ export class instructorCourseController {
       res.json({ success: true, meeting });
     } catch (error) {
       console.log('failed to create', error);
-      res.status(500).json({ success: false, message: 'Failed to create Zoom meeting', error: error.message });
+      res.status(500).json({ success: false, message: 'Failed to create Zoom meeting', error });
     }
   }
 
@@ -131,7 +131,7 @@ export class instructorCourseController {
     } catch (error) {
       console.error('Error submitting assignment:', error);
       logger.error('Error to submitting assignment:', error);
-      res.status(500).json({ message: 'Error submitting assignment', error: error.message });
+      res.status(500).json({ message: 'Error submitting assignment', error });
     }
   }
 
@@ -150,7 +150,7 @@ export class instructorCourseController {
     } catch (error) {
       console.error('Error submitting quiz:', error);
       logger.error('Error to submitting quiz:', error);
-      res.status(500).json({ message: 'Error submitting quiz', error: error.message });
+      res.status(500).json({ message: 'Error submitting quiz', error });
     }
   }
 
@@ -165,7 +165,7 @@ export class instructorCourseController {
     } catch (error) {
       console.error('Error creating order:', error);
       logger.error('Error to creating order:', error);
-      res.status(500).json({ message: 'Error creating order', error: error.message });
+      res.status(500).json({ message: 'Error creating order', error });
     }
   }
 
@@ -179,7 +179,7 @@ export class instructorCourseController {
     } catch (error) {
       console.error('Error fetching submissions:', error);
       logger.error('Error fetching submissions:', error);
-      res.status(500).json({ message: 'Error fetching submissions', error: error.message });
+      res.status(500).json({ message: 'Error fetching submissions', error });
     }
   }
 
@@ -192,7 +192,7 @@ export class instructorCourseController {
       res.status(200).json(result);
     } catch (error) {
       console.error('Error verifying payment:', error);
-      res.status(500).json({ message: 'Error verifying payment', error: error.message });
+      res.status(500).json({ message: 'Error verifying payment', error });
     }
   }
 
@@ -208,7 +208,7 @@ export class instructorCourseController {
       res.status(200).json(result);
     } catch (error) {
       console.error('Error checking enrollment:', error);
-      res.status(500).json({ message: 'Error checking enrollment', error: error.message });
+      res.status(500).json({ message: 'Error checking enrollment', error });
     }
   }
 
@@ -222,7 +222,7 @@ export class instructorCourseController {
     } catch (error) {
       console.error('Error fething coupons and offer', error);
       logger.error('Error fething coupons and offer:', error);
-      res.status(500).json({ message: 'Error fetching coupons and offer', error: error.message });
+      res.status(500).json({ message: 'Error fetching coupons and offer', error });
     }
   }
 
@@ -234,7 +234,7 @@ export class instructorCourseController {
     } catch (error) {
       console.error('Error fething students', error);
       logger.error('Error fething students:', error);
-      res.status(500).json({ message: 'Error fetching students', error: error.message });
+      res.status(500).json({ message: 'Error fetching students', error });
     }
   }
 
@@ -247,7 +247,7 @@ export class instructorCourseController {
     } catch (error) {
       console.error('Error creating announcement', error);
       logger.error('Error creating announcement:', error);
-      res.status(500).json({ message: 'Error creating announcement', error: error.message });
+      res.status(500).json({ message: 'Error creating announcement', error });
     }
   }
 
@@ -260,7 +260,7 @@ export class instructorCourseController {
     } catch (error) {
       console.error('Error creating announcement', error);
       logger.error('Error creating announcement:', error);
-      res.status(500).json({ message: 'Error creating announcement', error: error.message });
+      res.status(500).json({ message: 'Error creating announcement', error });
     }
   }
 }

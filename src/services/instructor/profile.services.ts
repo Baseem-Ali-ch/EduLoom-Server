@@ -1,8 +1,8 @@
 import { GetObjectCommand, PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 import { ObjectId } from 'mongoose';
-import { IInstructor, IInstructorProfileService } from 'src/interfaces/IInstructor';
-import { InstructorRepo } from 'src/repo/instructor/instructor.repo';
+import { IInstructor, IInstructorProfileService } from 'interfaces/IInstructor';
+import { InstructorRepo } from 'repo/instructor/instructor.repo';
 
 export class InstructorProfileService implements IInstructorProfileService {
   private _instructorRepository: InstructorRepo;

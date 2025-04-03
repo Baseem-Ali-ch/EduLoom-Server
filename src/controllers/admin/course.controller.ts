@@ -1,10 +1,10 @@
-import { adminCourseService } from 'src/services/admin/course.services';
 import { Response, Request } from 'express';
 import { CouponDTO, OfferDTO } from '../../dtos/dto';
 import { MapCoupon, MapOffer } from '../../mappers/mapper';
 import logger from '../../configs/logger';
-import { ICoupon, IOffer } from 'src/interfaces/ICourse';
 import { validate } from 'class-validator';
+import { adminCourseService } from 'services/admin/course.services';
+import { ICoupon, IOffer } from 'interfaces/ICourse';
 // import logger from '../../configs/logger';
 // import { CourseDTO } from '../../dtos/dto';
 // import { MapCourse } from '../../mappers/mapper';
@@ -63,7 +63,7 @@ export class AdminCourseController {
       logger.error('Controller : Error creating offer', error);
       res.status(500).json({
         message: 'Internal Server Error',
-        error: error.message,
+        error,
       });
     }
   }
@@ -153,7 +153,7 @@ export class AdminCourseController {
       logger.error('Controller : Error creating coupon', error);
       res.status(500).json({
         message: 'Internal Server Error',
-        error: error.message,
+        error
       });
     }
   }

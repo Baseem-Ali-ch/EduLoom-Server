@@ -28,7 +28,7 @@ export class SharedController {
     } catch (error) {
       logger.error('Controller: refreshing tokens', error);
       console.log('failed to refresh token', error);
-      res.status(500).json({ message: error.message });
+      res.status(500).json({ message: 'failed to refresh token', error });
     }
   }
 
@@ -40,7 +40,7 @@ export class SharedController {
       res.status(200).json({ message: 'revenues get successfully', result });
     } catch (error) {
       logger.error('Error fetching revenue', error);
-      res.status(500).json({ message: 'Error fetching revenue', error: error.message });
+      res.status(500).json({ message: 'Error fetching revenue', error });
     }
   }
 
@@ -78,7 +78,7 @@ export class SharedController {
       }
     } catch (error) {
       logger.error('Error processing withdrawal', error);
-      res.status(500).json({ message: 'Error processing withdrawal', error: error.message });
+      res.status(500).json({ message: 'Error processing withdrawal', error });
     }
   }
 

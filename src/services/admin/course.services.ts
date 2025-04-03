@@ -1,6 +1,6 @@
-import { CouponDTO, OfferDTO } from 'src/dtos/dto';
+import { CouponDTO, OfferDTO } from 'dtos/dto';
 import { CourseRepo } from '../../repo/admin/course.repo';
-import { ICoupon, IOffer } from 'src/interfaces/ICourse';
+import { ICoupon, IOffer } from 'interfaces/ICourse';
 
 export class adminCourseService {
   private _courseRepository: CourseRepo;

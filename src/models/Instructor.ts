@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { IInstructor } from "src/interfaces/IInstructor";
+import { IInstructor } from "interfaces/IInstructor";
 
 const InstructorSchema = new mongoose.Schema<IInstructor>(
   {

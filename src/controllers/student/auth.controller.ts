@@ -71,7 +71,7 @@ export class AuthController {
     } catch (error) {
       console.log('failed to login', error);
       logger.error('Controller : Error during login', error);
-      res.status(500).json({ message: error.message });
+      res.status(500).json({ message: 'Error during login', error });
     }
   }
 

@@ -1,4 +1,4 @@
-import { ICourse } from 'src/interfaces/IInstructor';
+import { ICourse } from 'interfaces/IInstructor';
 
 import mongoose from 'mongoose';
 

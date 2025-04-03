@@ -1,4 +1,4 @@
-import { ProfileService } from 'src/services/student/profile.services';
+import { ProfileService } from 'services/student/profile.services';
 import { Response } from 'express';
 import logger from '../../configs/logger';
 import { ChangePasswordDTO, InstructoInfoDTO, UpdateUserDTO } from '../../dtos/dto';

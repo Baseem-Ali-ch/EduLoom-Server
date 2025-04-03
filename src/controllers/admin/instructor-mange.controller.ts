@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import logger from '../../configs/logger';
-import { InstructorMangeService } from 'src/services/admin/instructor-manage.services';
+import { InstructorMangeService } from 'services/admin/instructor-manage.services';
 
 export class InstructorMangementController {
   private _instructorMangeService: InstructorMangeService;

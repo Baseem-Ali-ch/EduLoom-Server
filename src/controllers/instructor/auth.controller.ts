@@ -39,7 +39,7 @@ export class InstructorAuthController {
     } catch (error) {
       console.log('failed to login', error);
       logger.error('Controller : Error Invalid Credentials', error);
-      res.status(500).json({ message: error.message });
+      res.status(500).json({ message: 'Invalid Credentials', error });
     }
   }
 

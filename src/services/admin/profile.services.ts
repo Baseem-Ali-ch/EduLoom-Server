@@ -1,8 +1,8 @@
 import { GetObjectCommand, PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 import { ObjectId } from 'mongoose';
-import { IProfileService } from 'src/interfaces/IAdmin';
-import { AdminRepo } from 'src/repo/admin/admin.repo';
+import { IProfileService } from 'interfaces/IAdmin';
+import { AdminRepo } from 'repo/admin/admin.repo';
 
 export class ProfileService implements IProfileService{
   private _adminRepository: AdminRepo;

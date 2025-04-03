@@ -1,7 +1,7 @@
 import { Offer } from '../../models/Offer';
 import { Coupon } from '../../models/Coupon';
 import { BaseRepository } from '../base.repo';
-import { ICoupon, IOffer } from 'src/interfaces/ICourse';
+import { ICoupon, IOffer } from 'interfaces/ICourse';
 
 export class CourseRepo extends BaseRepository<any> {
   constructor() {
