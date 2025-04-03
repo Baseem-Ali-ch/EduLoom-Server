@@ -2,6 +2,12 @@ import { createClient } from 'redis';
 
 const redisClient = createClient({
   url: 'redis://localhost:6379',
+  socket: {
+    reconnectStrategy: (retries) => {
+      if (retries > 10) return new Error('Max retries reached');
+      return Math.min(retries * 100, 2000); // Exponential backoff, max 2s
+    },
+  },
 });
 
 (async () => {
@@ -13,7 +19,6 @@ const redisClient = createClient({
   }
 })();
 
-// Handle connection errors
 redisClient.on('error', (err) => {
   console.error('Redis Client Error', err);
 });
