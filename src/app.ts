@@ -34,7 +34,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(
   cors({
-    origin: 'http://localhost:4200',
+    origin: ['http://localhost:4200', 'https://eduloom.servepics.com'],
+
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
@@ -51,7 +52,7 @@ app.use('/shared', sharedRouter);
 const server = createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: 'http://localhost:4200',
+    origin: ['http://localhost:4200', 'https://eduloom.servepics.com'],
     credentials: true,
   },
 });
