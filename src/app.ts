@@ -1,5 +1,5 @@
 import express from 'express';
-import bodyParser from 'body-parser';
+// import bodyParser from 'body-parser';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import morgan from 'morgan';
@@ -29,34 +29,55 @@ connectDB();
 // Middleware configurations
 app.use(morgan('dev'));
 app.use(cookieParser());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+// Replace all body parsers with:
+app.use(express.json({
+  limit: '10mb',
+  verify: (buf) => {
+    try {
+      JSON.parse(buf.toString()); // Validate JSON syntax
+    } catch (e) {
+      throw new Error('Invalid JSON');
+    }
+  }
+}));
+
+app.use(express.urlencoded({ 
+  extended: true,
+  limit: '10mb'
+}));
+// app.use(bodyParser.json());
 // Replace the existing cors() middleware with:
-// app.use(cors({
-//   origin: (origin, callback) => {
-//     const allowedOrigins = [
-//       'https://eduloom.fun',
-//       'https://www.eduloom.fun',
-//       'http://localhost:4200'
-//     ];
-//     if (!origin || allowedOrigins.includes(origin)) {
-//       callback(null, true);
-//     } else {
-//       callback(new Error('Not allowed by CORS'));
-//     }
-//   },
-//   credentials: true,
-//   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-//   allowedHeaders: ['Content-Type', 'Authorization', 'x-access-token']
-// }));
-app.use(cors())
+app.use(cors({
+  origin: (origin, callback) => {
+    const allowedOrigins = [
+      'https://eduloom.fun',
+      'https://www.eduloom.fun',
+      'http://localhost:4200'
+    ];
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'x-access-token']
+}));
+
+// Add this BEFORE routes
+app.use((req, res, next) => {
+  console.log('Incoming Content-Type:', req.headers['content-type']);
+  console.log('Content-Length:', req.headers['content-length']);
+  next();
+});
 
 // Router middleware
 app.use('/student', userRouter);
 app.use('/admin', adminRouter);
 app.use('/instructor', instructorRouter);
 app.use('/shared', sharedRouter);
+
 
 // Server and Socket.IO setup
 const server = createServer(app);
