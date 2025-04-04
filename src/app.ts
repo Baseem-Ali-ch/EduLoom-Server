@@ -33,23 +33,24 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 // Replace the existing cors() middleware with:
-app.use(cors({
-  origin: (origin, callback) => {
-    const allowedOrigins = [
-      'https://eduloom.fun',
-      'https://www.eduloom.fun',
-      'http://localhost:4200'
-    ];
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'x-access-token']
-}));
+// app.use(cors({
+//   origin: (origin, callback) => {
+//     const allowedOrigins = [
+//       'https://eduloom.fun',
+//       'https://www.eduloom.fun',
+//       'http://localhost:4200'
+//     ];
+//     if (!origin || allowedOrigins.includes(origin)) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error('Not allowed by CORS'));
+//     }
+//   },
+//   credentials: true,
+//   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+//   allowedHeaders: ['Content-Type', 'Authorization', 'x-access-token']
+// }));
+app.use(cors())
 
 // Router middleware
 app.use('/student', userRouter);
