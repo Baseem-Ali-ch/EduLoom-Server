@@ -34,11 +34,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(
   cors({
-    origin: ['http://localhost:4200', 'https://eduloom.servepics.com'],
-
+    origin: [
+      'http://localhost:4200', 
+      'https://eduloom.fun'
+    ],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
+    allowedHeaders: ['Content-Type', 'Authorization']
   })
 );
 
