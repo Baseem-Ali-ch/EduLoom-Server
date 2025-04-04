@@ -29,20 +29,40 @@ connectDB();
 // Middleware configurations
 app.use(morgan('dev'));
 app.use(cookieParser());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ 
+  limit: '10mb',
+  verify: (buf) => {
+    try {
+      JSON.parse(buf.toString());
+    } catch (e) {
+      throw new Error('Invalid JSON');
+    }
+  }
+}));
+
+app.use(express.urlencoded({ 
+  extended: true, 
+  limit: '10mb'
+}));
 app.use(bodyParser.json());
-app.use(
-  cors({
-    origin: [
-      'http://localhost:4200', 
-      'https://eduloom.fun'
-    ],
-    credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'PATCH', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization']
-  })
-);
+// Replace the existing cors() middleware with:
+app.use(cors({
+  origin: (origin, callback) => {
+    const allowedOrigins = [
+      'https://eduloom.fun',
+      'https://www.eduloom.fun',
+      'http://localhost:4200'
+    ];
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'x-access-token']
+}));
 
 // Router middleware
 app.use('/student', userRouter);
@@ -54,9 +74,14 @@ app.use('/shared', sharedRouter);
 const server = createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: ['http://localhost:4200', 'https://eduloom.servepics.com'],
+    origin: [
+      'https://eduloom.fun',
+      'http://localhost:4200'
+    ],
     credentials: true,
-  },
+    allowedHeaders: ['Authorization'],
+    methods: ['GET', 'POST']
+  }
 });
 
 // interface ChatMessage {
