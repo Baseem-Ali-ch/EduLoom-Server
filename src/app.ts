@@ -29,21 +29,8 @@ connectDB();
 // Middleware configurations
 app.use(morgan('dev'));
 app.use(cookieParser());
-app.use(express.json({ 
-  limit: '10mb',
-  verify: (buf) => {
-    try {
-      JSON.parse(buf.toString());
-    } catch (e) {
-      throw new Error('Invalid JSON');
-    }
-  }
-}));
-
-app.use(express.urlencoded({ 
-  extended: true, 
-  limit: '10mb'
-}));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 // Replace the existing cors() middleware with:
 app.use(cors({
@@ -74,14 +61,9 @@ app.use('/shared', sharedRouter);
 const server = createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: [
-      'https://eduloom.fun',
-      'http://localhost:4200'
-    ],
+    origin: ['https://eduloom.fun','http://localhost:4200'],
     credentials: true,
-    allowedHeaders: ['Authorization'],
-    methods: ['GET', 'POST']
-  }
+  },
 });
 
 // interface ChatMessage {
